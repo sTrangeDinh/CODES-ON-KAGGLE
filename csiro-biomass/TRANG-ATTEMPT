@@ -2,13 +2,13 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "28fda67a",
+   "id": "bb8f1cbb",
    "metadata": {
     "papermill": {
-     "duration": 0.003974,
-     "end_time": "2026-01-23T01:08:52.034603",
+     "duration": 0.005224,
+     "end_time": "2026-01-23T01:56:29.301486",
      "exception": false,
-     "start_time": "2026-01-23T01:08:52.030629",
+     "start_time": "2026-01-23T01:56:29.296262",
      "status": "completed"
     },
     "tags": []
@@ -20,19 +20,19 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "1aa88b3e",
+   "id": "2dbed698",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:08:52.042476Z",
-     "iopub.status.busy": "2026-01-23T01:08:52.042005Z",
-     "iopub.status.idle": "2026-01-23T01:09:06.692872Z",
-     "shell.execute_reply": "2026-01-23T01:09:06.691984Z"
+     "iopub.execute_input": "2026-01-23T01:56:29.311610Z",
+     "iopub.status.busy": "2026-01-23T01:56:29.311266Z",
+     "iopub.status.idle": "2026-01-23T01:56:44.532757Z",
+     "shell.execute_reply": "2026-01-23T01:56:44.531513Z"
     },
     "papermill": {
-     "duration": 14.657262,
-     "end_time": "2026-01-23T01:09:06.694993",
+     "duration": 15.228918,
+     "end_time": "2026-01-23T01:56:44.534755",
      "exception": false,
-     "start_time": "2026-01-23T01:08:52.037731",
+     "start_time": "2026-01-23T01:56:29.305837",
      "status": "completed"
     },
     "tags": []
@@ -109,25 +109,25 @@
     "print(\"✅ DATA_DIR:\", DATA_DIR)\n",
     "print(\"✅ WEIGHTS_DIR:\", WEIGHTS_DIR)\n",
     "print(\"✅ DEVICE:\", DEVICE)\n",
-    "print(\"✅ Train CSV:\", TRAIN_CSV)\n"
+    "print(\"✅ Train CSV:\", TRAIN_CSV)"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "c1550c59",
+   "id": "2c699718",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:06.703535Z",
-     "iopub.status.busy": "2026-01-23T01:09:06.702541Z",
-     "iopub.status.idle": "2026-01-23T01:09:06.708588Z",
-     "shell.execute_reply": "2026-01-23T01:09:06.707583Z"
+     "iopub.execute_input": "2026-01-23T01:56:44.544446Z",
+     "iopub.status.busy": "2026-01-23T01:56:44.543943Z",
+     "iopub.status.idle": "2026-01-23T01:56:44.549938Z",
+     "shell.execute_reply": "2026-01-23T01:56:44.549038Z"
     },
     "papermill": {
-     "duration": 0.012136,
-     "end_time": "2026-01-23T01:09:06.710416",
+     "duration": 0.013398,
+     "end_time": "2026-01-23T01:56:44.551927",
      "exception": false,
-     "start_time": "2026-01-23T01:09:06.698280",
+     "start_time": "2026-01-23T01:56:44.538529",
      "status": "completed"
     },
     "tags": []
@@ -148,13 +148,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "28117d7c",
+   "id": "d70971c9",
    "metadata": {
     "papermill": {
-     "duration": 0.002983,
-     "end_time": "2026-01-23T01:09:06.716467",
+     "duration": 0.003688,
+     "end_time": "2026-01-23T01:56:44.559408",
      "exception": false,
-     "start_time": "2026-01-23T01:09:06.713484",
+     "start_time": "2026-01-23T01:56:44.555720",
      "status": "completed"
     },
     "tags": []
@@ -169,19 +169,19 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "ad29ab99",
+   "id": "99e748cd",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:06.724356Z",
-     "iopub.status.busy": "2026-01-23T01:09:06.723801Z",
-     "iopub.status.idle": "2026-01-23T01:09:07.895580Z",
-     "shell.execute_reply": "2026-01-23T01:09:07.894262Z"
+     "iopub.execute_input": "2026-01-23T01:56:44.568776Z",
+     "iopub.status.busy": "2026-01-23T01:56:44.568395Z",
+     "iopub.status.idle": "2026-01-23T01:56:45.258023Z",
+     "shell.execute_reply": "2026-01-23T01:56:45.257012Z"
     },
     "papermill": {
-     "duration": 1.178148,
-     "end_time": "2026-01-23T01:09:07.897602",
+     "duration": 0.696881,
+     "end_time": "2026-01-23T01:56:45.260087",
      "exception": false,
-     "start_time": "2026-01-23T01:09:06.719454",
+     "start_time": "2026-01-23T01:56:44.563206",
      "status": "completed"
     },
     "tags": []
@@ -280,18 +280,18 @@
     "    return extractor, tfm\n",
     "\n",
     "EXTRACTOR, IMG_TFM = build_resnet18_feature_extractor(RESNET18_WEIGHTS, DEVICE)\n",
-    "print(\"[DEBUG] Feature extractor ready.\")\n"
+    "print(\"[DEBUG] Feature extractor ready.\")"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "8ea5c8fb",
+   "id": "9be3b42a",
    "metadata": {
     "papermill": {
-     "duration": 0.003794,
-     "end_time": "2026-01-23T01:09:07.905552",
+     "duration": 0.004022,
+     "end_time": "2026-01-23T01:56:45.268972",
      "exception": false,
-     "start_time": "2026-01-23T01:09:07.901758",
+     "start_time": "2026-01-23T01:56:45.264950",
      "status": "completed"
     },
     "tags": []
@@ -303,19 +303,209 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "b4414922",
+   "id": "685d49ba",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:07.913934Z",
-     "iopub.status.busy": "2026-01-23T01:09:07.913554Z",
-     "iopub.status.idle": "2026-01-23T01:09:08.009552Z",
-     "shell.execute_reply": "2026-01-23T01:09:08.008742Z"
+     "iopub.execute_input": "2026-01-23T01:56:45.278924Z",
+     "iopub.status.busy": "2026-01-23T01:56:45.278548Z",
+     "iopub.status.idle": "2026-01-23T01:56:45.632603Z",
+     "shell.execute_reply": "2026-01-23T01:56:45.631580Z"
     },
     "papermill": {
-     "duration": 0.10267,
-     "end_time": "2026-01-23T01:09:08.011370",
+     "duration": 0.362254,
+     "end_time": "2026-01-23T01:56:45.635026",
      "exception": false,
-     "start_time": "2026-01-23T01:09:07.908700",
+     "start_time": "2026-01-23T01:56:45.272772",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[DEBUG] weights_dir: /kaggle/input/pretrained-pytorch-models\n",
+      "[DEBUG] resnet18 candidates found: 1\n",
+      "[DEBUG] first few candidates: ['/kaggle/input/pretrained-pytorch-models/resnet18-5c106cde.pth']\n",
+      "[DEBUG] RESNET18_WEIGHTS selected: /kaggle/input/pretrained-pytorch-models/resnet18-5c106cde.pth\n",
+      "[DEBUG] Feature extractor ready.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# ============================================\n",
+    "# CELL 2 — Model / Weights Setup (ResNet18 offline) + Robust Loader + Debug Prints\n",
+    "# ============================================\n",
+    "def find_resnet18_weights(weights_dir: str) -> str:\n",
+    "    print(\"[DEBUG] weights_dir:\", weights_dir)\n",
+    "\n",
+    "    wd = Path(weights_dir)\n",
+    "    if not wd.exists():\n",
+    "        raise FileNotFoundError(f\"Missing weights dataset. Expected directory: {weights_dir}\")\n",
+    "\n",
+    "    candidates = []\n",
+    "    for p in wd.rglob(\"*\"):\n",
+    "        if p.is_file() and p.suffix.lower() in {\".pth\", \".pt\"} and \"resnet18\" in p.name.lower():\n",
+    "            candidates.append(str(p))\n",
+    "\n",
+    "    print(\"[DEBUG] resnet18 candidates found:\", len(candidates))\n",
+    "    if candidates:\n",
+    "        print(\"[DEBUG] first few candidates:\", candidates[:5])\n",
+    "\n",
+    "    if not candidates:\n",
+    "        raise FileNotFoundError(f\"No resnet18 .pth/.pt file found under {weights_dir}\")\n",
+    "\n",
+    "    candidates_sorted = sorted(\n",
+    "        candidates,\n",
+    "        key=lambda x: (0 if re.search(r\"resnet18-.*\\.pth$\", os.path.basename(x).lower()) else 1, len(x))\n",
+    "    )\n",
+    "    chosen = candidates_sorted[0]\n",
+    "    print(\"[DEBUG] RESNET18_WEIGHTS selected:\", chosen)\n",
+    "    return chosen\n",
+    "\n",
+    "RESNET18_WEIGHTS = find_resnet18_weights(WEIGHTS_DIR)\n",
+    "\n",
+    "def _to_state_dict(obj):\n",
+    "    \"\"\"Convert various checkpoint formats into a state_dict dict.\"\"\"\n",
+    "    if isinstance(obj, nn.Module):\n",
+    "        return obj.state_dict()\n",
+    "    if isinstance(obj, dict):\n",
+    "        if \"state_dict\" in obj and isinstance(obj[\"state_dict\"], dict):\n",
+    "            return obj[\"state_dict\"]\n",
+    "        # If it already looks like a state_dict\n",
+    "        if all(isinstance(k, str) for k in obj.keys()):\n",
+    "            return obj\n",
+    "    raise TypeError(f\"Unsupported checkpoint type: {type(obj)}\")\n",
+    "\n",
+    "def build_resnet18_feature_extractor(weights_path: str, device: str):\n",
+    "    model = models.resnet18(weights=None)  # no internet download\n",
+    "    raw = torch.load(weights_path, map_location=\"cpu\", weights_only=False)\n",
+    "    state = _to_state_dict(raw)\n",
+    "\n",
+    "    cleaned = {}\n",
+    "    for k, v in state.items():\n",
+    "        k2 = k\n",
+    "        for prefix in (\"module.\", \"model.\"):\n",
+    "            if k2.startswith(prefix):\n",
+    "                k2 = k2[len(prefix):]\n",
+    "        cleaned[k2] = v\n",
+    "\n",
+    "    missing, unexpected = model.load_state_dict(cleaned, strict=False)\n",
+    "    if missing:\n",
+    "        print(\"Warning: missing keys when loading weights:\", missing[:5], (\"...\" if len(missing) > 5 else \"\"))\n",
+    "    if unexpected:\n",
+    "        print(\"Warning: unexpected keys when loading weights:\", unexpected[:5], (\"...\" if len(unexpected) > 5 else \"\"))\n",
+    "\n",
+    "    extractor = nn.Sequential(*list(model.children())[:-1]).to(device)\n",
+    "    extractor.eval()\n",
+    "    for p in extractor.parameters():\n",
+    "        p.requires_grad = False\n",
+    "\n",
+    "    tfm = transforms.Compose([\n",
+    "        SquarePad(),\n",
+    "        transforms.Resize((224, 224)),\n",
+    "        transforms.ToTensor(),\n",
+    "        transforms.Normalize(\n",
+    "            mean=(0.485, 0.456, 0.406),\n",
+    "            std=(0.229, 0.224, 0.225),\n",
+    "        ),\n",
+    "    ])\n",
+    "    return extractor, tfm\n",
+    "\n",
+    "EXTRACTOR, IMG_TFM = build_resnet18_feature_extractor(RESNET18_WEIGHTS, DEVICE)\n",
+    "print(\"[DEBUG] Feature extractor ready.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "d2acb629",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-01-23T01:56:45.645653Z",
+     "iopub.status.busy": "2026-01-23T01:56:45.645295Z",
+     "iopub.status.idle": "2026-01-23T01:56:45.653362Z",
+     "shell.execute_reply": "2026-01-23T01:56:45.652066Z"
+    },
+    "papermill": {
+     "duration": 0.015536,
+     "end_time": "2026-01-23T01:56:45.655381",
+     "exception": false,
+     "start_time": "2026-01-23T01:56:45.639845",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "✅ Defined get_tta_transforms() for validation/inference-only TTA.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# ============================================\n",
+    "# CELL 2.5 — AUGMENTATIONS — TTA Views\n",
+    "# (Integrated from LB-0-57-CODE section \"2. AUGMENTATIONS ( CHI DUNG VALIDATION)\")\n",
+    "# ============================================\n",
+    "def get_tta_transforms():\n",
+    "    \"\"\"\n",
+    "    Returns a LIST of torchvision transform pipelines for TTA.\n",
+    "    Each pipeline is a different \"view\" of the image.\n",
+    "    NOTE: Applied ONLY for validation/inference (not training), consistent with 'CHI DUNG VALIDATION'.\n",
+    "    \"\"\"\n",
+    "    # Base pipeline (Resize + Normalize + ToTensor) mirrors IMG_TFM normalization config.\n",
+    "    base_transforms = [\n",
+    "        SquarePad(),\n",
+    "        transforms.Resize((224, 224)),\n",
+    "        transforms.ToTensor(),\n",
+    "        transforms.Normalize(\n",
+    "            mean=(0.485, 0.456, 0.406),\n",
+    "            std=(0.229, 0.224, 0.225),\n",
+    "        ),\n",
+    "    ]\n",
+    "\n",
+    "    # View 1: Original (Resize + Normalize)\n",
+    "    original_view = transforms.Compose([\n",
+    "        *base_transforms\n",
+    "    ])\n",
+    "\n",
+    "    # View 2: Horizontal Flip (always)\n",
+    "    hflip_view = transforms.Compose([\n",
+    "        transforms.RandomHorizontalFlip(p=1.0),\n",
+    "        *base_transforms\n",
+    "    ])\n",
+    "\n",
+    "    # View 3: Vertical Flip (always)\n",
+    "    vflip_view = transforms.Compose([\n",
+    "        transforms.RandomVerticalFlip(p=1.0),\n",
+    "        *base_transforms\n",
+    "    ])\n",
+    "\n",
+    "    return [original_view, hflip_view, vflip_view]\n",
+    "\n",
+    "print(\"✅ Defined get_tta_transforms() for validation/inference-only TTA.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "83e5825f",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-01-23T01:56:45.665602Z",
+     "iopub.status.busy": "2026-01-23T01:56:45.665240Z",
+     "iopub.status.idle": "2026-01-23T01:56:45.749034Z",
+     "shell.execute_reply": "2026-01-23T01:56:45.747440Z"
+    },
+    "papermill": {
+     "duration": 0.09161,
+     "end_time": "2026-01-23T01:56:45.751150",
+     "exception": false,
+     "start_time": "2026-01-23T01:56:45.659540",
      "status": "completed"
     },
     "tags": []
@@ -328,120 +518,10 @@
       "Scanning directory for ground truth: /kaggle/input/csiro-biomass/test\n",
       "✅ Found 1 images in directory.\n",
       "train_df: (1785, 9)\n",
-      "train_wide: (357, 7)\n"
+      "train_wide: (357, 7)\n",
+      "[DEBUG] train_df columns: ['sample_id', 'image_path', 'Sampling_Date', 'State', 'Species', 'Pre_GSHH_NDVI', 'Height_Ave_cm', 'target_name', 'target']\n",
+      "[DEBUG] train_wide rows : 357\n"
      ]
-    },
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th>target_name</th>\n",
-       "      <th>image_path</th>\n",
-       "      <th>Dry_Clover_g</th>\n",
-       "      <th>Dry_Dead_g</th>\n",
-       "      <th>Dry_Green_g</th>\n",
-       "      <th>Dry_Total_g</th>\n",
-       "      <th>GDM_g</th>\n",
-       "      <th>abs_path</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>0</th>\n",
-       "      <td>train/ID1011485656.jpg</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>31.9984</td>\n",
-       "      <td>16.2751</td>\n",
-       "      <td>48.2735</td>\n",
-       "      <td>16.2750</td>\n",
-       "      <td>/kaggle/input/csiro-biomass/train/ID1011485656...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>1</th>\n",
-       "      <td>train/ID1012260530.jpg</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>7.6000</td>\n",
-       "      <td>7.6000</td>\n",
-       "      <td>7.6000</td>\n",
-       "      <td>/kaggle/input/csiro-biomass/train/ID1012260530...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>train/ID1025234388.jpg</td>\n",
-       "      <td>6.0500</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>6.0500</td>\n",
-       "      <td>6.0500</td>\n",
-       "      <td>/kaggle/input/csiro-biomass/train/ID1025234388...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>train/ID1028611175.jpg</td>\n",
-       "      <td>0.0000</td>\n",
-       "      <td>30.9703</td>\n",
-       "      <td>24.2376</td>\n",
-       "      <td>55.2079</td>\n",
-       "      <td>24.2376</td>\n",
-       "      <td>/kaggle/input/csiro-biomass/train/ID1028611175...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>train/ID1035947949.jpg</td>\n",
-       "      <td>0.4343</td>\n",
-       "      <td>23.2239</td>\n",
-       "      <td>10.5261</td>\n",
-       "      <td>34.1844</td>\n",
-       "      <td>10.9605</td>\n",
-       "      <td>/kaggle/input/csiro-biomass/train/ID1035947949...</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "target_name              image_path  Dry_Clover_g  Dry_Dead_g  Dry_Green_g  \\\n",
-       "0            train/ID1011485656.jpg        0.0000     31.9984      16.2751   \n",
-       "1            train/ID1012260530.jpg        0.0000      0.0000       7.6000   \n",
-       "2            train/ID1025234388.jpg        6.0500      0.0000       0.0000   \n",
-       "3            train/ID1028611175.jpg        0.0000     30.9703      24.2376   \n",
-       "4            train/ID1035947949.jpg        0.4343     23.2239      10.5261   \n",
-       "\n",
-       "target_name  Dry_Total_g    GDM_g  \\\n",
-       "0                48.2735  16.2750   \n",
-       "1                 7.6000   7.6000   \n",
-       "2                 6.0500   6.0500   \n",
-       "3                55.2079  24.2376   \n",
-       "4                34.1844  10.9605   \n",
-       "\n",
-       "target_name                                           abs_path  \n",
-       "0            /kaggle/input/csiro-biomass/train/ID1011485656...  \n",
-       "1            /kaggle/input/csiro-biomass/train/ID1012260530...  \n",
-       "2            /kaggle/input/csiro-biomass/train/ID1025234388...  \n",
-       "3            /kaggle/input/csiro-biomass/train/ID1028611175...  \n",
-       "4            /kaggle/input/csiro-biomass/train/ID1035947949...  "
-      ]
-     },
-     "execution_count": 4,
-     "metadata": {},
-     "output_type": "execute_result"
     }
    ],
    "source": [
@@ -539,40 +619,7 @@
     "train_wide = train_wide.dropna(subset=TARGET_NAMES).reset_index(drop=True)\n",
     "\n",
     "print(\"train_wide:\", train_wide.shape)\n",
-    "train_wide.head()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "id": "e548d6d6",
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:08.020610Z",
-     "iopub.status.busy": "2026-01-23T01:09:08.019962Z",
-     "iopub.status.idle": "2026-01-23T01:09:08.025880Z",
-     "shell.execute_reply": "2026-01-23T01:09:08.024850Z"
-    },
-    "papermill": {
-     "duration": 0.012389,
-     "end_time": "2026-01-23T01:09:08.027469",
-     "exception": false,
-     "start_time": "2026-01-23T01:09:08.015080",
-     "status": "completed"
-    },
-    "tags": []
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "[DEBUG] train_df columns: ['sample_id', 'image_path', 'Sampling_Date', 'State', 'Species', 'Pre_GSHH_NDVI', 'Height_Ave_cm', 'target_name', 'target']\n",
-      "[DEBUG] train_wide rows : 357\n"
-     ]
-    }
-   ],
-   "source": [
+    "train_wide.head()\n",
     "# Fail-fast checks (put after train_wide is built)\n",
     "print(\"[DEBUG] train_df columns:\", list(train_df.columns))\n",
     "#print(\"[DEBUG] test_df columns :\", list(test_df.columns))\n",
@@ -584,13 +631,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "5e040d53",
+   "id": "de6a58cf",
    "metadata": {
     "papermill": {
-     "duration": 0.003436,
-     "end_time": "2026-01-23T01:09:08.034507",
+     "duration": 0.00412,
+     "end_time": "2026-01-23T01:56:45.760219",
      "exception": false,
-     "start_time": "2026-01-23T01:09:08.031071",
+     "start_time": "2026-01-23T01:56:45.756099",
      "status": "completed"
     },
     "tags": []
@@ -601,20 +648,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
-   "id": "aba70d63",
+   "execution_count": 7,
+   "id": "9f12e5ab",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:08.043485Z",
-     "iopub.status.busy": "2026-01-23T01:09:08.042876Z",
-     "iopub.status.idle": "2026-01-23T01:09:08.054350Z",
-     "shell.execute_reply": "2026-01-23T01:09:08.053510Z"
+     "iopub.execute_input": "2026-01-23T01:56:45.770238Z",
+     "iopub.status.busy": "2026-01-23T01:56:45.769880Z",
+     "iopub.status.idle": "2026-01-23T01:56:45.781127Z",
+     "shell.execute_reply": "2026-01-23T01:56:45.780246Z"
     },
     "papermill": {
-     "duration": 0.018304,
-     "end_time": "2026-01-23T01:09:08.056243",
+     "duration": 0.018791,
+     "end_time": "2026-01-23T01:56:45.783044",
      "exception": false,
-     "start_time": "2026-01-23T01:09:08.037939",
+     "start_time": "2026-01-23T01:56:45.764253",
      "status": "completed"
     },
     "tags": []
@@ -653,10 +700,10 @@
     "        return img\n",
     "\n",
     "@torch.no_grad()\n",
-    "def extract_features(image_paths, batch_size=BATCH_SIZE):\n",
+    "def extract_features(image_paths, batch_size=BATCH_SIZE, transform=IMG_TFM):\n",
     "    print(f\"[CELL4] extract_features: {len(image_paths)} images | batch_size={batch_size} | workers={NUM_WORKERS}\")\n",
     "\n",
-    "    ds = ImagePathDataset(image_paths, transform=IMG_TFM)\n",
+    "    ds = ImagePathDataset(image_paths, transform=transform)\n",
     "    loader = DataLoader(\n",
     "        ds,\n",
     "        batch_size=batch_size,\n",
@@ -688,13 +735,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "32343f1f",
+   "id": "f3da6896",
    "metadata": {
     "papermill": {
-     "duration": 0.003599,
-     "end_time": "2026-01-23T01:09:08.063708",
+     "duration": 0.003997,
+     "end_time": "2026-01-23T01:56:45.791325",
      "exception": false,
-     "start_time": "2026-01-23T01:09:08.060109",
+     "start_time": "2026-01-23T01:56:45.787328",
      "status": "completed"
     },
     "tags": []
@@ -705,20 +752,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
-   "id": "31798abc",
+   "execution_count": 8,
+   "id": "a25d94ec",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:08.072366Z",
-     "iopub.status.busy": "2026-01-23T01:09:08.071967Z",
-     "iopub.status.idle": "2026-01-23T01:09:57.370317Z",
-     "shell.execute_reply": "2026-01-23T01:09:57.369591Z"
+     "iopub.execute_input": "2026-01-23T01:56:45.800954Z",
+     "iopub.status.busy": "2026-01-23T01:56:45.800596Z",
+     "iopub.status.idle": "2026-01-23T01:57:32.936118Z",
+     "shell.execute_reply": "2026-01-23T01:57:32.935233Z"
     },
     "papermill": {
-     "duration": 49.305054,
-     "end_time": "2026-01-23T01:09:57.372258",
+     "duration": 47.142857,
+     "end_time": "2026-01-23T01:57:32.938182",
      "exception": false,
-     "start_time": "2026-01-23T01:09:08.067204",
+     "start_time": "2026-01-23T01:56:45.795325",
      "status": "completed"
     },
     "tags": []
@@ -759,13 +806,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e4967436",
+   "id": "7f8aeeb9",
    "metadata": {
     "papermill": {
-     "duration": 0.004236,
-     "end_time": "2026-01-23T01:09:57.380750",
+     "duration": 0.00459,
+     "end_time": "2026-01-23T01:57:32.947376",
      "exception": false,
-     "start_time": "2026-01-23T01:09:57.376514",
+     "start_time": "2026-01-23T01:57:32.942786",
      "status": "completed"
     },
     "tags": []
@@ -776,20 +823,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
-   "id": "914de507",
+   "execution_count": 9,
+   "id": "c19cbcb9",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:09:57.391837Z",
-     "iopub.status.busy": "2026-01-23T01:09:57.390841Z",
-     "iopub.status.idle": "2026-01-23T01:12:07.478152Z",
-     "shell.execute_reply": "2026-01-23T01:12:07.477010Z"
+     "iopub.execute_input": "2026-01-23T01:57:32.958226Z",
+     "iopub.status.busy": "2026-01-23T01:57:32.957784Z",
+     "iopub.status.idle": "2026-01-23T01:59:45.385240Z",
+     "shell.execute_reply": "2026-01-23T01:59:45.384211Z"
     },
     "papermill": {
-     "duration": 130.098498,
-     "end_time": "2026-01-23T01:12:07.483480",
+     "duration": 132.440998,
+     "end_time": "2026-01-23T01:59:45.393042",
      "exception": false,
-     "start_time": "2026-01-23T01:09:57.384982",
+     "start_time": "2026-01-23T01:57:32.952044",
      "status": "completed"
     },
     "tags": []
@@ -823,13 +870,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "53bab799",
+   "id": "ee60ab75",
    "metadata": {
     "papermill": {
-     "duration": 0.003873,
-     "end_time": "2026-01-23T01:12:07.491466",
+     "duration": 0.004523,
+     "end_time": "2026-01-23T01:59:45.402145",
      "exception": false,
-     "start_time": "2026-01-23T01:12:07.487593",
+     "start_time": "2026-01-23T01:59:45.397622",
      "status": "completed"
     },
     "tags": []
@@ -840,20 +887,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
-   "id": "b96df18f",
+   "execution_count": 10,
+   "id": "1f3161cc",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:12:07.502154Z",
-     "iopub.status.busy": "2026-01-23T01:12:07.501607Z",
-     "iopub.status.idle": "2026-01-23T01:12:08.112723Z",
-     "shell.execute_reply": "2026-01-23T01:12:08.111741Z"
+     "iopub.execute_input": "2026-01-23T01:59:45.413668Z",
+     "iopub.status.busy": "2026-01-23T01:59:45.413341Z",
+     "iopub.status.idle": "2026-01-23T01:59:47.202453Z",
+     "shell.execute_reply": "2026-01-23T01:59:47.201299Z"
     },
     "papermill": {
-     "duration": 0.618375,
-     "end_time": "2026-01-23T01:12:08.114613",
+     "duration": 1.797884,
+     "end_time": "2026-01-23T01:59:47.205098",
      "exception": false,
-     "start_time": "2026-01-23T01:12:07.496238",
+     "start_time": "2026-01-23T01:59:45.407214",
      "status": "completed"
     },
     "tags": []
@@ -863,6 +910,8 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "[CELL7] Using TTA views: 3 (validation/inference-only)\n",
+      "[CELL7] Extracting features for TTA view 1/3 ...\n",
       "[CELL4] extract_features: 1 images | batch_size=16 | workers=0\n",
       "[CELL4] Dataset init: 1 images\n",
       "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
@@ -870,82 +919,24 @@
       "[CELL4] First batch: (1, 3, 224, 224)\n",
       "[CELL4] Progress: 1/1\n",
       "[CELL4] features shape: (1, 512)\n",
-      "X_test: (1, 512)\n"
+      "[CELL7] Extracting features for TTA view 2/3 ...\n",
+      "[CELL4] extract_features: 1 images | batch_size=16 | workers=0\n",
+      "[CELL4] Dataset init: 1 images\n",
+      "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "[CELL4] total_batches=1\n",
+      "[CELL4] First batch: (1, 3, 224, 224)\n",
+      "[CELL4] Progress: 1/1\n",
+      "[CELL4] features shape: (1, 512)\n",
+      "[CELL7] Extracting features for TTA view 3/3 ...\n",
+      "[CELL4] extract_features: 1 images | batch_size=16 | workers=0\n",
+      "[CELL4] Dataset init: 1 images\n",
+      "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "[CELL4] total_batches=1\n",
+      "[CELL4] First batch: (1, 3, 224, 224)\n",
+      "[CELL4] Progress: 1/1\n",
+      "[CELL4] features shape: (1, 512)\n",
+      "[CELL7] Averaging predictions across TTA views ...\n"
      ]
-    },
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>image_path</th>\n",
-       "      <th>target_name</th>\n",
-       "      <th>target</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>0</th>\n",
-       "      <td>test/ID1001187975.jpg</td>\n",
-       "      <td>Dry_Clover_g</td>\n",
-       "      <td>3.565780</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>1</th>\n",
-       "      <td>test/ID1001187975.jpg</td>\n",
-       "      <td>Dry_Dead_g</td>\n",
-       "      <td>21.354683</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>test/ID1001187975.jpg</td>\n",
-       "      <td>Dry_Green_g</td>\n",
-       "      <td>20.139318</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>test/ID1001187975.jpg</td>\n",
-       "      <td>Dry_Total_g</td>\n",
-       "      <td>40.031811</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>test/ID1001187975.jpg</td>\n",
-       "      <td>GDM_g</td>\n",
-       "      <td>21.055847</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "              image_path   target_name     target\n",
-       "0  test/ID1001187975.jpg  Dry_Clover_g   3.565780\n",
-       "1  test/ID1001187975.jpg    Dry_Dead_g  21.354683\n",
-       "2  test/ID1001187975.jpg   Dry_Green_g  20.139318\n",
-       "3  test/ID1001187975.jpg   Dry_Total_g  40.031811\n",
-       "4  test/ID1001187975.jpg         GDM_g  21.055847"
-      ]
-     },
-     "execution_count": 9,
-     "metadata": {},
-     "output_type": "execute_result"
     }
    ],
    "source": [
@@ -959,12 +950,27 @@
     "unique_test_paths = test_df[\"image_path\"].drop_duplicates().tolist()\n",
     "unique_test_abs = [os.path.join(DATA_DIR, p) for p in unique_test_paths]\n",
     "\n",
-    "X_test = extract_features(unique_test_abs, batch_size=16)\n",
-    "print(\"X_test:\", X_test.shape)\n",
+    "# ----------------------------\n",
+    "# TTA (validation/inference-only)\n",
+    "# ----------------------------\n",
+    "tta_transforms = get_tta_transforms()\n",
+    "print(f\"[CELL7] Using TTA views: {len(tta_transforms)} (validation/inference-only)\")\n",
     "\n",
+    "# Extract features for each TTA view\n",
+    "X_test_views = []\n",
+    "for i, tfm in enumerate(tta_transforms):\n",
+    "    print(f\"[CELL7] Extracting features for TTA view {i+1}/{len(tta_transforms)} ...\")\n",
+    "    X_view = extract_features(unique_test_abs, batch_size=16, transform=tfm)\n",
+    "    X_test_views.append(X_view)\n",
+    "\n",
+    "# Average predictions across TTA views (matches LB logic: ensemble over views)\n",
+    "print(\"[CELL7] Averaging predictions across TTA views ...\")\n",
     "pred_matrix = np.zeros((len(unique_test_paths), len(TARGET_NAMES)), dtype=np.float32)\n",
     "for j, t in enumerate(TARGET_NAMES):\n",
-    "    pred_matrix[:, j] = models_rf[t].predict(X_test)\n",
+    "    view_preds = []\n",
+    "    for X_view in X_test_views:\n",
+    "        view_preds.append(models_rf[t].predict(X_view))\n",
+    "    pred_matrix[:, j] = np.mean(np.stack(view_preds, axis=0), axis=0).astype(np.float32)\n",
     "\n",
     "pred_wide = pd.DataFrame(pred_matrix, columns=TARGET_NAMES)\n",
     "pred_wide[\"image_path\"] = unique_test_paths\n",
@@ -973,20 +979,18 @@
     "    id_vars=\"image_path\",\n",
     "    var_name=\"target_name\",\n",
     "    value_name=\"target\"\n",
-    ")\n",
-    "\n",
-    "pred_long.head()"
+    ")"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "9db845e6",
+   "id": "5ee6f767",
    "metadata": {
     "papermill": {
-     "duration": 0.004355,
-     "end_time": "2026-01-23T01:12:08.123638",
+     "duration": 0.00551,
+     "end_time": "2026-01-23T01:59:47.216568",
      "exception": false,
-     "start_time": "2026-01-23T01:12:08.119283",
+     "start_time": "2026-01-23T01:59:47.211058",
      "status": "completed"
     },
     "tags": []
@@ -997,20 +1001,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
-   "id": "4ec3f506",
+   "execution_count": 11,
+   "id": "f35b7394",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-23T01:12:08.134324Z",
-     "iopub.status.busy": "2026-01-23T01:12:08.133840Z",
-     "iopub.status.idle": "2026-01-23T01:12:08.156231Z",
-     "shell.execute_reply": "2026-01-23T01:12:08.155176Z"
+     "iopub.execute_input": "2026-01-23T01:59:47.228685Z",
+     "iopub.status.busy": "2026-01-23T01:59:47.228323Z",
+     "iopub.status.idle": "2026-01-23T01:59:47.255333Z",
+     "shell.execute_reply": "2026-01-23T01:59:47.254330Z"
     },
     "papermill": {
-     "duration": 0.030354,
-     "end_time": "2026-01-23T01:12:08.158301",
+     "duration": 0.03578,
+     "end_time": "2026-01-23T01:59:47.257382",
      "exception": false,
-     "start_time": "2026-01-23T01:12:08.127947",
+     "start_time": "2026-01-23T01:59:47.221602",
      "status": "completed"
     },
     "tags": []
@@ -1027,15 +1031,16 @@
       "   Unique Targets: ['Dry_Clover_g' 'Dry_Dead_g' 'Dry_Green_g' 'Dry_Total_g' 'GDM_g']\n",
       "   Head:\n",
       "                    sample_id     target\n",
-      "0  ID1001187975__Dry_Clover_g   3.565780\n",
-      "1    ID1001187975__Dry_Dead_g  21.354683\n",
-      "2   ID1001187975__Dry_Green_g  20.139318\n",
-      "3   ID1001187975__Dry_Total_g  40.031811\n",
-      "4         ID1001187975__GDM_g  21.055847\n"
+      "0  ID1001187975__Dry_Clover_g   2.007529\n",
+      "1    ID1001187975__Dry_Dead_g  23.641769\n",
+      "2   ID1001187975__Dry_Green_g  21.688047\n",
+      "3   ID1001187975__Dry_Total_g  39.692436\n",
+      "4         ID1001187975__GDM_g  19.860756\n"
      ]
     }
    ],
    "source": [
+    "pred_long.head()\n",
     "SUBMISSION_PATH = \"/kaggle/working/submission.csv\"\n",
     "\n",
     "def generate_submission_direct(pred_long: pd.DataFrame, output_path: str = SUBMISSION_PATH):\n",
@@ -1101,13 +1106,144 @@
   },
   {
    "cell_type": "markdown",
-   "id": "0f9e50da",
+   "id": "a21a932a",
    "metadata": {
     "papermill": {
-     "duration": 0.004501,
-     "end_time": "2026-01-23T01:12:08.167830",
+     "duration": 0.00493,
+     "end_time": "2026-01-23T01:59:47.267391",
      "exception": false,
-     "start_time": "2026-01-23T01:12:08.163329",
+     "start_time": "2026-01-23T01:59:47.262461",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## 9. SANITY CHECKS"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "0e20db1c",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-01-23T01:59:47.278882Z",
+     "iopub.status.busy": "2026-01-23T01:59:47.278522Z",
+     "iopub.status.idle": "2026-01-23T01:59:47.686655Z",
+     "shell.execute_reply": "2026-01-23T01:59:47.685598Z"
+    },
+    "papermill": {
+     "duration": 0.416743,
+     "end_time": "2026-01-23T01:59:47.688936",
+     "exception": false,
+     "start_time": "2026-01-23T01:59:47.272193",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "====================\n",
+      "SANITY CHECKS\n",
+      "====================\n",
+      "[Sanity] unique_test_abs: 1\n",
+      "[Sanity] subset_paths: 1 | example: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "\n",
+      "[Sanity] TTA view 1/3\n",
+      "[CELL4] Dataset init: 1 images\n",
+      "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "[Sanity] batch.shape: (1, 3, 224, 224)\n",
+      "[Sanity] batch.dtype : torch.float32\n",
+      "[Sanity] batch.min/max: -2.1179039478302 2.1519827842712402\n",
+      "[Sanity] feats.shape: (1, 512)\n",
+      "[Sanity] feats.dtype : torch.float32\n",
+      "\n",
+      "[Sanity] TTA view 2/3\n",
+      "[CELL4] Dataset init: 1 images\n",
+      "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "[Sanity] batch.shape: (1, 3, 224, 224)\n",
+      "[Sanity] batch.dtype : torch.float32\n",
+      "[Sanity] batch.min/max: -2.1179039478302 2.1519827842712402\n",
+      "[Sanity] feats.shape: (1, 512)\n",
+      "[Sanity] feats.dtype : torch.float32\n",
+      "\n",
+      "[Sanity] TTA view 3/3\n",
+      "[CELL4] Dataset init: 1 images\n",
+      "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
+      "[Sanity] batch.shape: (1, 3, 224, 224)\n",
+      "[Sanity] batch.dtype : torch.float32\n",
+      "[Sanity] batch.min/max: -2.1179039478302 2.1519827842712402\n",
+      "[Sanity] feats.shape: (1, 512)\n",
+      "[Sanity] feats.dtype : torch.float32\n",
+      "\n",
+      "✅ Sanity checks passed (no exceptions).\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Sanity checks\n",
+    "print(\"\\n====================\")\n",
+    "print(\"SANITY CHECKS\")\n",
+    "print(\"====================\")\n",
+    "\n",
+    "# 1) Instantiate affected dataset(s)/dataloader(s) with TTA transforms\n",
+    "try:\n",
+    "    tta_transforms_sc = get_tta_transforms()\n",
+    "    n_imgs = len(unique_test_abs)\n",
+    "    print(\"[Sanity] unique_test_abs:\", n_imgs)\n",
+    "\n",
+    "    if n_imgs == 0:\n",
+    "        print(\"[Sanity] No test images found to validate transforms/dataloader.\")\n",
+    "    else:\n",
+    "        # Use a small subset for quick sanity\n",
+    "        subset_paths = unique_test_abs[:min(8, n_imgs)]\n",
+    "        print(\"[Sanity] subset_paths:\", len(subset_paths), \"| example:\", subset_paths[0])\n",
+    "\n",
+    "        for v_idx, tfm in enumerate(tta_transforms_sc):\n",
+    "            print(f\"\\n[Sanity] TTA view {v_idx+1}/{len(tta_transforms_sc)}\")\n",
+    "\n",
+    "            ds_sc = ImagePathDataset(subset_paths, transform=tfm)\n",
+    "            dl_sc = DataLoader(\n",
+    "                ds_sc,\n",
+    "                batch_size=min(4, len(ds_sc)),\n",
+    "                shuffle=False,\n",
+    "                num_workers=NUM_WORKERS,\n",
+    "                pin_memory=(DEVICE == \"cuda\"),\n",
+    "            )\n",
+    "\n",
+    "            batch = next(iter(dl_sc))\n",
+    "            print(\"[Sanity] batch.shape:\", tuple(batch.shape))\n",
+    "            print(\"[Sanity] batch.dtype :\", batch.dtype)\n",
+    "            print(\"[Sanity] batch.min/max:\", float(batch.min()), float(batch.max()))\n",
+    "\n",
+    "            # 2) Run one batch through extractor\n",
+    "            with torch.no_grad():\n",
+    "                batch_dev = batch.to(DEVICE, non_blocking=True)\n",
+    "                feats = EXTRACTOR(batch_dev).view(batch_dev.size(0), -1)\n",
+    "            print(\"[Sanity] feats.shape:\", tuple(feats.shape))\n",
+    "            print(\"[Sanity] feats.dtype :\", feats.dtype)\n",
+    "\n",
+    "        print(\"\\n✅ Sanity checks passed (no exceptions).\")\n",
+    "\n",
+    "except Exception as e:\n",
+    "    print(\"\\n❌ Sanity checks failed with exception:\")\n",
+    "    print(type(e).__name__, str(e))\n",
+    "    raise\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "451f96c8",
+   "metadata": {
+    "papermill": {
+     "duration": 0.005352,
+     "end_time": "2026-01-23T01:59:47.699581",
+     "exception": false,
+     "start_time": "2026-01-23T01:59:47.694229",
      "status": "completed"
     },
     "tags": []
@@ -1157,14 +1293,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 202.507297,
-   "end_time": "2026-01-23T01:12:11.218889",
+   "duration": 204.555091,
+   "end_time": "2026-01-23T01:59:50.529545",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-01-23T01:08:48.711592",
+   "start_time": "2026-01-23T01:56:25.974454",
    "version": "2.6.0"
   }
  },
