@@ -1,145 +1,14 @@
 {
  "cells": [
   {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "43b3a330",
-   "metadata": {
-    "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
-    "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
-    "execution": {
-     "iopub.execute_input": "2026-01-06T19:05:41.387107Z",
-     "iopub.status.busy": "2026-01-06T19:05:41.386657Z",
-     "iopub.status.idle": "2026-01-06T19:05:41.394134Z",
-     "shell.execute_reply": "2026-01-06T19:05:41.392792Z"
-    },
-    "papermill": {
-     "duration": 0.01682,
-     "end_time": "2026-01-06T19:05:41.396334",
-     "exception": false,
-     "start_time": "2026-01-06T19:05:41.379514",
-     "status": "completed"
-    },
-    "tags": []
-   },
-   "outputs": [],
-   "source": [
-    "# # This Python 3 environment comes with many helpful analytics libraries installed\n",
-    "# # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python\n",
-    "# # For example, here's several helpful packages to load\n",
-    "\n",
-    "# import numpy as np # linear algebra\n",
-    "# import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)\n",
-    "\n",
-    "# # Input data files are available in the read-only \"../input/\" directory\n",
-    "# # For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory\n",
-    "\n",
-    "# import os\n",
-    "# for dirname, _, filenames in os.walk('/kaggle/input'):\n",
-    "#     for filename in filenames:\n",
-    "#         print(os.path.join(dirname, filename))\n",
-    "\n",
-    "# # You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using \"Save & Run All\" \n",
-    "# # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "f2bb4dbd",
-   "metadata": {
-    "execution": {
-     "iopub.execute_input": "2026-01-06T19:05:41.406260Z",
-     "iopub.status.busy": "2026-01-06T19:05:41.405954Z",
-     "iopub.status.idle": "2026-01-06T19:05:41.417606Z",
-     "shell.execute_reply": "2026-01-06T19:05:41.416440Z"
-    },
-    "papermill": {
-     "duration": 0.019628,
-     "end_time": "2026-01-06T19:05:41.419828",
-     "exception": false,
-     "start_time": "2026-01-06T19:05:41.400200",
-     "status": "completed"
-    },
-    "tags": []
-   },
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "'\\nKaggle to GitHub Sync Configuration\\nRepository: CODES-ON-KAGGLE\\n'"
-      ]
-     },
-     "execution_count": 2,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "\"\"\"\n",
-    "OLD CODE: VER 2 FROM GEMINI\n",
-    "\"\"\"\n",
-    "\"\"\"\n",
-    "Kaggle to GitHub Sync Configuration\n",
-    "Repository: CODES-ON-KAGGLE\n",
-    "\"\"\"\n",
-    "# from pathlib import Path\n",
-    "# import os\n",
-    "\n",
-    "# # --- KAGGLE CONFIGURATION ---\n",
-    "\n",
-    "# # 1. Define the Base Directory using pathlib\n",
-    "# # Kaggle inputs are read-only and located in /kaggle/input\n",
-    "# BASE_DIR = Path('/kaggle/input') \n",
-    "\n",
-    "# # 2. Define the Dataset Name \n",
-    "# # Change 'project-name' to the folder name found in /kaggle/input\n",
-    "# # NOTE: 'project-name' can be found by looking at the URL when accessing Kaggle Competitions\n",
-    "# DATASET_NAME = 'csiro-biomass'\n",
-    "# DATASET_PATH = BASE_DIR / DATASET_NAME\n",
-    "\n",
-    "# # 3. Define Paths to CSVs and Image Directories\n",
-    "# # We use the / operator for clean, cross-platform path joining\n",
-    "# TRAIN_CSV_PATH = DATASET_PATH / 'train.csv'\n",
-    "# TEST_CSV_PATH = DATASET_PATH / 'test.csv'\n",
-    "\n",
-    "# TRAIN_IMAGES_ROOT = DATASET_PATH / 'train'\n",
-    "# TEST_IMAGE_ROOT = DATASET_PATH / 'test'\n",
-    "\n",
-    "# # 4. Verification Logic\n",
-    "# def verify_paths():\n",
-    "#     paths_to_check = {\n",
-    "#         \"Training CSV\": TRAIN_CSV_PATH,\n",
-    "#         \"Testing CSV\": TEST_CSV_PATH,\n",
-    "#         \"Train Images Root\": TRAIN_IMAGES_ROOT,\n",
-    "#         \"Test Image Root\"  : TEST_IMAGE_ROOT\n",
-    "#     }\n",
-    "    \n",
-    "#     print(f\"--- Path Verification for {DATASET_NAME} ---\")\n",
-    "#     for name, path in paths_to_check.items():\n",
-    "#         if path.exists():\n",
-    "#             print(f\"✅ {name} found at: {path}\")\n",
-    "#         else:\n",
-    "#             print(f\"❌ {name} NOT found at: {path}\")\n",
-    "            \n",
-    "#     # If the main folder isn't found, list what is available\n",
-    "#     if not DATASET_PATH.exists():\n",
-    "#         print(f\"\\nAvailable directories in {BASE_DIR}:\")\n",
-    "#         print([p.name for p in BASE_DIR.iterdir() if p.is_dir()])\n",
-    "\n",
-    "# if __name__ == \"__main__\":\n",
-    "#     verify_paths()"
-   ]
-  },
-  {
    "cell_type": "markdown",
-   "id": "c09c685c",
+   "id": "28fda67a",
    "metadata": {
     "papermill": {
-     "duration": 0.003526,
-     "end_time": "2026-01-06T19:05:41.427027",
+     "duration": 0.003974,
+     "end_time": "2026-01-23T01:08:52.034603",
      "exception": false,
-     "start_time": "2026-01-06T19:05:41.423501",
+     "start_time": "2026-01-23T01:08:52.030629",
      "status": "completed"
     },
     "tags": []
@@ -150,20 +19,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
-   "id": "9bc62f76",
+   "execution_count": 1,
+   "id": "1aa88b3e",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:05:41.436119Z",
-     "iopub.status.busy": "2026-01-06T19:05:41.435779Z",
-     "iopub.status.idle": "2026-01-06T19:06:00.185608Z",
-     "shell.execute_reply": "2026-01-06T19:06:00.183955Z"
+     "iopub.execute_input": "2026-01-23T01:08:52.042476Z",
+     "iopub.status.busy": "2026-01-23T01:08:52.042005Z",
+     "iopub.status.idle": "2026-01-23T01:09:06.692872Z",
+     "shell.execute_reply": "2026-01-23T01:09:06.691984Z"
     },
     "papermill": {
-     "duration": 18.757934,
-     "end_time": "2026-01-06T19:06:00.188337",
+     "duration": 14.657262,
+     "end_time": "2026-01-23T01:09:06.694993",
      "exception": false,
-     "start_time": "2026-01-06T19:05:41.430403",
+     "start_time": "2026-01-23T01:08:52.037731",
      "status": "completed"
     },
     "tags": []
@@ -201,6 +70,7 @@
     "import torch.nn as nn\n",
     "from torch.utils.data import Dataset, DataLoader\n",
     "from torchvision import models, transforms\n",
+    "import torchvision.transforms.functional as F\n",
     "from PIL import Image\n",
     "\n",
     "from sklearn.ensemble import RandomForestRegressor\n",
@@ -220,7 +90,7 @@
     "\n",
     "TRAIN_CSV = os.path.join(DATA_DIR, \"train.csv\")\n",
     "TEST_CSV  = os.path.join(DATA_DIR, \"test.csv\")\n",
-    "SAMPLE_SUB_CSV = os.path.join(DATA_DIR, \"sample_submission.csv\")\n",
+    "# SAMPLE_SUB_CSV = os.path.join(DATA_DIR, \"sample_submission.csv\")\n",
     "\n",
     "# ✅ Pretrained weights dataset input for model resnet18\n",
     "WEIGHTS_DIR = \"/kaggle/input/pretrained-pytorch-models\"\n",
@@ -232,7 +102,7 @@
     "# N_FOLDS = 5 \n",
     "\n",
     "# Safety checks (fail fast if something isn't mounted)\n",
-    "for p in [DATA_DIR, WEIGHTS_DIR, TRAIN_CSV, TEST_CSV, SAMPLE_SUB_CSV]:\n",
+    "for p in [DATA_DIR, WEIGHTS_DIR, TRAIN_CSV, TEST_CSV]:\n",
     "    if not os.path.exists(p):\n",
     "        raise FileNotFoundError(f\"Missing expected path: {p}\")\n",
     "\n",
@@ -243,14 +113,48 @@
    ]
   },
   {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "c1550c59",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-01-23T01:09:06.703535Z",
+     "iopub.status.busy": "2026-01-23T01:09:06.702541Z",
+     "iopub.status.idle": "2026-01-23T01:09:06.708588Z",
+     "shell.execute_reply": "2026-01-23T01:09:06.707583Z"
+    },
+    "papermill": {
+     "duration": 0.012136,
+     "end_time": "2026-01-23T01:09:06.710416",
+     "exception": false,
+     "start_time": "2026-01-23T01:09:06.698280",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "# ============================================\n",
+    "# CELL 1.5 — Letterboxing\n",
+    "# ============================================\n",
+    "class SquarePad:\n",
+    "    def __call__(self, image):\n",
+    "        w, h = image.size\n",
+    "        max_wh = max(w, h)\n",
+    "        p_left, p_top = (max_wh - w) // 2, (max_wh - h) // 2\n",
+    "        p_right, p_bottom = max_wh - w - p_left, max_wh - h - p_top\n",
+    "        return F.pad(image, (p_left, p_top, p_right, p_bottom), 0, 'constant') "
+   ]
+  },
+  {
    "cell_type": "markdown",
-   "id": "238796ba",
+   "id": "28117d7c",
    "metadata": {
     "papermill": {
-     "duration": 0.003762,
-     "end_time": "2026-01-06T19:06:00.195798",
+     "duration": 0.002983,
+     "end_time": "2026-01-23T01:09:06.716467",
      "exception": false,
-     "start_time": "2026-01-06T19:06:00.192036",
+     "start_time": "2026-01-23T01:09:06.713484",
      "status": "completed"
     },
     "tags": []
@@ -264,20 +168,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
-   "id": "4fd2df6f",
+   "execution_count": 3,
+   "id": "ad29ab99",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:00.205615Z",
-     "iopub.status.busy": "2026-01-06T19:06:00.205077Z",
-     "iopub.status.idle": "2026-01-06T19:06:01.122158Z",
-     "shell.execute_reply": "2026-01-06T19:06:01.120233Z"
+     "iopub.execute_input": "2026-01-23T01:09:06.724356Z",
+     "iopub.status.busy": "2026-01-23T01:09:06.723801Z",
+     "iopub.status.idle": "2026-01-23T01:09:07.895580Z",
+     "shell.execute_reply": "2026-01-23T01:09:07.894262Z"
     },
     "papermill": {
-     "duration": 0.926026,
-     "end_time": "2026-01-06T19:06:01.125461",
+     "duration": 1.178148,
+     "end_time": "2026-01-23T01:09:07.897602",
      "exception": false,
-     "start_time": "2026-01-06T19:06:00.199435",
+     "start_time": "2026-01-23T01:09:06.719454",
      "status": "completed"
     },
     "tags": []
@@ -365,6 +269,7 @@
     "        p.requires_grad = False\n",
     "\n",
     "    tfm = transforms.Compose([\n",
+    "        SquarePad(),\n",
     "        transforms.Resize((224, 224)),\n",
     "        transforms.ToTensor(),\n",
     "        transforms.Normalize(\n",
@@ -379,21 +284,38 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "8ea5c8fb",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003794,
+     "end_time": "2026-01-23T01:09:07.905552",
+     "exception": false,
+     "start_time": "2026-01-23T01:09:07.901758",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## 3. DATA LOADING"
+   ]
+  },
+  {
    "cell_type": "code",
-   "execution_count": 5,
-   "id": "cc822ef4",
+   "execution_count": 4,
+   "id": "b4414922",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:01.138449Z",
-     "iopub.status.busy": "2026-01-06T19:06:01.137611Z",
-     "iopub.status.idle": "2026-01-06T19:06:01.293230Z",
-     "shell.execute_reply": "2026-01-06T19:06:01.292103Z"
+     "iopub.execute_input": "2026-01-23T01:09:07.913934Z",
+     "iopub.status.busy": "2026-01-23T01:09:07.913554Z",
+     "iopub.status.idle": "2026-01-23T01:09:08.009552Z",
+     "shell.execute_reply": "2026-01-23T01:09:08.008742Z"
     },
     "papermill": {
-     "duration": 0.165607,
-     "end_time": "2026-01-06T19:06:01.295782",
+     "duration": 0.10267,
+     "end_time": "2026-01-23T01:09:08.011370",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.130175",
+     "start_time": "2026-01-23T01:09:07.908700",
      "status": "completed"
     },
     "tags": []
@@ -403,9 +325,9 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "Scanning directory for ground truth: /kaggle/input/csiro-biomass/test\n",
+      "✅ Found 1 images in directory.\n",
       "train_df: (1785, 9)\n",
-      "test_df : (5, 3)\n",
-      "sample_submission: (5, 2)\n",
       "train_wide: (357, 7)\n"
      ]
     },
@@ -517,7 +439,7 @@
        "4            /kaggle/input/csiro-biomass/train/ID1035947949...  "
       ]
      },
-     "execution_count": 5,
+     "execution_count": 4,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -527,12 +449,57 @@
     "# CELL 3 — Data Loading (train/test/sample_submission)\n",
     "# ============================================\n",
     "train_df = pd.read_csv(TRAIN_CSV)\n",
-    "test_df  = pd.read_csv(TEST_CSV)\n",
-    "sample_sub = pd.read_csv(SAMPLE_SUB_CSV)\n",
+    "\n",
+    "TEST_FOLDER_NAME = \"test\"\n",
+    "TEST_IMG_DIR = os.path.join(DATA_DIR, TEST_FOLDER_NAME)\n",
+    "\n",
+    "print(f\"Scanning directory for ground truth: {TEST_IMG_DIR}\")\n",
+    "\n",
+    "# 3. MANUAL DIRECTORY SCAN\n",
+    "# We ignore the provided test.csv and look at the disk\n",
+    "try:\n",
+    "    # Get all image files sorted alphabetically\n",
+    "    all_test_images = sorted([\n",
+    "        f for f in os.listdir(TEST_IMG_DIR) \n",
+    "        if f.lower().endswith(('.png', '.jpg', '.jpeg'))\n",
+    "    ])\n",
+    "except FileNotFoundError:\n",
+    "    print(\"⚠️ WARN: Test directory not found (Local run?). Creating empty DF.\")\n",
+    "    all_test_images = []\n",
+    "\n",
+    "print(f\"✅ Found {len(all_test_images)} images in directory.\")\n",
+    "\n",
+    "# 4. CONSTRUCT COMPATIBLE DATAFRAME\n",
+    "# Trang's code later does: os.path.join(DATA_DIR, p)\n",
+    "# So we must ensure 'p' includes the folder name, e.g., \"test/image_01.jpg\"\n",
+    "\n",
+    "data = []\n",
+    "for filename in all_test_images:\n",
+    "    # Create the relative path so Trang's join works\n",
+    "    relative_path = os.path.join(TEST_FOLDER_NAME, filename)\n",
+    "    \n",
+    "    data.append({\n",
+    "        \"image_path\": relative_path,  # This fixes the pathing\n",
+    "        \"sample_id\": filename,        # Placeholder\n",
+    "        \"target_name\": \"GDM\"          # Placeholder\n",
+    "    })\n",
+    "\n",
+    "# Overwrite test_df with our manual list\n",
+    "test_df = pd.DataFrame(data)\n",
+    "\n",
+    "# 5. Sample Sub (Optional)\n",
+    "# if os.path.exists(SAMPLE_SUB_CSV):\n",
+    "    # sample_sub = pd.read_csv(SAMPLE_SUB_CSV)\n",
+    "# else:\n",
+    "    # sample_sub = pd.DataFrame()\n",
+    "\n",
+    "\n",
+    "#test_df  = pd.read_csv(TEST_CSV)\n",
+    "#sample_sub = pd.read_csv(SAMPLE_SUB_CSV)\n",
     "\n",
     "print(\"train_df:\", train_df.shape)\n",
-    "print(\"test_df :\", test_df.shape)\n",
-    "print(\"sample_submission:\", sample_sub.shape)\n",
+    "#print(\"test_df :\", test_df.shape)\n",
+    "#print(\"sample_submission:\", sample_sub.shape)\n",
     "\n",
     "TARGET_NAMES = [\"Dry_Clover_g\", \"Dry_Dead_g\", \"Dry_Green_g\", \"Dry_Total_g\", \"GDM_g\"]\n",
     "\n",
@@ -577,20 +544,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
-   "id": "1ee6d3a1",
+   "execution_count": 5,
+   "id": "e548d6d6",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:01.309958Z",
-     "iopub.status.busy": "2026-01-06T19:06:01.308649Z",
-     "iopub.status.idle": "2026-01-06T19:06:01.318377Z",
-     "shell.execute_reply": "2026-01-06T19:06:01.316677Z"
+     "iopub.execute_input": "2026-01-23T01:09:08.020610Z",
+     "iopub.status.busy": "2026-01-23T01:09:08.019962Z",
+     "iopub.status.idle": "2026-01-23T01:09:08.025880Z",
+     "shell.execute_reply": "2026-01-23T01:09:08.024850Z"
     },
     "papermill": {
-     "duration": 0.020038,
-     "end_time": "2026-01-06T19:06:01.320567",
+     "duration": 0.012389,
+     "end_time": "2026-01-23T01:09:08.027469",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.300529",
+     "start_time": "2026-01-23T01:09:08.015080",
      "status": "completed"
     },
     "tags": []
@@ -601,7 +568,6 @@
      "output_type": "stream",
      "text": [
       "[DEBUG] train_df columns: ['sample_id', 'image_path', 'Sampling_Date', 'State', 'Species', 'Pre_GSHH_NDVI', 'Height_Ave_cm', 'target_name', 'target']\n",
-      "[DEBUG] test_df columns : ['sample_id', 'image_path', 'target_name']\n",
       "[DEBUG] train_wide rows : 357\n"
      ]
     }
@@ -609,7 +575,7 @@
    "source": [
     "# Fail-fast checks (put after train_wide is built)\n",
     "print(\"[DEBUG] train_df columns:\", list(train_df.columns))\n",
-    "print(\"[DEBUG] test_df columns :\", list(test_df.columns))\n",
+    "#print(\"[DEBUG] test_df columns :\", list(test_df.columns))\n",
     "print(\"[DEBUG] train_wide rows :\", len(train_wide))\n",
     "\n",
     "if len(train_wide) == 0:\n",
@@ -618,13 +584,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "a6205e24",
+   "id": "5e040d53",
    "metadata": {
     "papermill": {
-     "duration": 0.004469,
-     "end_time": "2026-01-06T19:06:01.329770",
+     "duration": 0.003436,
+     "end_time": "2026-01-23T01:09:08.034507",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.325301",
+     "start_time": "2026-01-23T01:09:08.031071",
      "status": "completed"
     },
     "tags": []
@@ -635,20 +601,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
-   "id": "2b8af775",
+   "execution_count": 6,
+   "id": "aba70d63",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:01.343965Z",
-     "iopub.status.busy": "2026-01-06T19:06:01.343181Z",
-     "iopub.status.idle": "2026-01-06T19:06:01.356285Z",
-     "shell.execute_reply": "2026-01-06T19:06:01.355184Z"
+     "iopub.execute_input": "2026-01-23T01:09:08.043485Z",
+     "iopub.status.busy": "2026-01-23T01:09:08.042876Z",
+     "iopub.status.idle": "2026-01-23T01:09:08.054350Z",
+     "shell.execute_reply": "2026-01-23T01:09:08.053510Z"
     },
     "papermill": {
-     "duration": 0.023681,
-     "end_time": "2026-01-06T19:06:01.358338",
+     "duration": 0.018304,
+     "end_time": "2026-01-23T01:09:08.056243",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.334657",
+     "start_time": "2026-01-23T01:09:08.037939",
      "status": "completed"
     },
     "tags": []
@@ -717,42 +683,42 @@
     "\n",
     "    feats_np = np.vstack(feats) if feats else np.empty((0, 512), dtype=np.float32)\n",
     "    print(\"[CELL4] features shape:\", feats_np.shape)\n",
-    "    return feats_np\n"
+    "    return feats_np#"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "9e996876",
+   "id": "32343f1f",
    "metadata": {
     "papermill": {
-     "duration": 0.004036,
-     "end_time": "2026-01-06T19:06:01.366749",
+     "duration": 0.003599,
+     "end_time": "2026-01-23T01:09:08.063708",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.362713",
+     "start_time": "2026-01-23T01:09:08.060109",
      "status": "completed"
     },
     "tags": []
    },
    "source": [
-    "## 5. Extract Train Images Features + Make sure the function in Cell 4 runs correctly"
+    "# 5. Extract Train Images Features + Make sure the function in Cell 4 runs correctly"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
-   "id": "fe45a185",
+   "execution_count": 7,
+   "id": "31798abc",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:01.376553Z",
-     "iopub.status.busy": "2026-01-06T19:06:01.376189Z",
-     "iopub.status.idle": "2026-01-06T19:06:48.047060Z",
-     "shell.execute_reply": "2026-01-06T19:06:48.045066Z"
+     "iopub.execute_input": "2026-01-23T01:09:08.072366Z",
+     "iopub.status.busy": "2026-01-23T01:09:08.071967Z",
+     "iopub.status.idle": "2026-01-23T01:09:57.370317Z",
+     "shell.execute_reply": "2026-01-23T01:09:57.369591Z"
     },
     "papermill": {
-     "duration": 46.679,
-     "end_time": "2026-01-06T19:06:48.049662",
+     "duration": 49.305054,
+     "end_time": "2026-01-23T01:09:57.372258",
      "exception": false,
-     "start_time": "2026-01-06T19:06:01.370662",
+     "start_time": "2026-01-23T01:09:08.067204",
      "status": "completed"
     },
     "tags": []
@@ -762,17 +728,18 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "[CELL4] extract_features: 357 images | batch_size=64 | workers=0\n",
+      "[CELL4] extract_features: 357 images | batch_size=16 | workers=0\n",
       "[CELL4] Dataset init: 357 images\n",
       "[CELL4] Example path: /kaggle/input/csiro-biomass/train/ID1011485656.jpg\n",
-      "[CELL4] total_batches=6\n",
-      "[CELL4] First batch: (64, 3, 224, 224)\n",
-      "[CELL4] Progress: 1/6\n",
-      "[CELL4] Progress: 2/6\n",
-      "[CELL4] Progress: 3/6\n",
-      "[CELL4] Progress: 4/6\n",
-      "[CELL4] Progress: 5/6\n",
-      "[CELL4] Progress: 6/6\n",
+      "[CELL4] total_batches=23\n",
+      "[CELL4] First batch: (16, 3, 224, 224)\n",
+      "[CELL4] Progress: 1/23\n",
+      "[CELL4] Progress: 4/23\n",
+      "[CELL4] Progress: 8/23\n",
+      "[CELL4] Progress: 12/23\n",
+      "[CELL4] Progress: 16/23\n",
+      "[CELL4] Progress: 20/23\n",
+      "[CELL4] Progress: 23/23\n",
       "[CELL4] features shape: (357, 512)\n",
       "X_train: (357, 512)\n",
       "Y_train: (357, 5)\n"
@@ -783,7 +750,7 @@
     "# ============================================\n",
     "# CELL 5 — Extract Train Features\n",
     "# ============================================\n",
-    "X_train = extract_features(train_wide[\"abs_path\"].tolist(), batch_size=64)\n",
+    "X_train = extract_features(train_wide[\"abs_path\"].tolist(), batch_size=16)\n",
     "Y_train = train_wide[TARGET_NAMES].values.astype(np.float32)\n",
     "\n",
     "print(\"X_train:\", X_train.shape)\n",
@@ -792,13 +759,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "bcc4f93f",
+   "id": "e4967436",
    "metadata": {
     "papermill": {
-     "duration": 0.004674,
-     "end_time": "2026-01-06T19:06:48.058987",
+     "duration": 0.004236,
+     "end_time": "2026-01-23T01:09:57.380750",
      "exception": false,
-     "start_time": "2026-01-06T19:06:48.054313",
+     "start_time": "2026-01-23T01:09:57.376514",
      "status": "completed"
     },
     "tags": []
@@ -809,20 +776,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
-   "id": "9e981431",
+   "execution_count": 8,
+   "id": "914de507",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:06:48.070160Z",
-     "iopub.status.busy": "2026-01-06T19:06:48.069775Z",
-     "iopub.status.idle": "2026-01-06T19:08:17.011153Z",
-     "shell.execute_reply": "2026-01-06T19:08:17.009850Z"
+     "iopub.execute_input": "2026-01-23T01:09:57.391837Z",
+     "iopub.status.busy": "2026-01-23T01:09:57.390841Z",
+     "iopub.status.idle": "2026-01-23T01:12:07.478152Z",
+     "shell.execute_reply": "2026-01-23T01:12:07.477010Z"
     },
     "papermill": {
-     "duration": 88.953528,
-     "end_time": "2026-01-06T19:08:17.017080",
+     "duration": 130.098498,
+     "end_time": "2026-01-23T01:12:07.483480",
      "exception": false,
-     "start_time": "2026-01-06T19:06:48.063552",
+     "start_time": "2026-01-23T01:09:57.384982",
      "status": "completed"
     },
     "tags": []
@@ -845,24 +812,24 @@
     "for i, t in enumerate(TARGET_NAMES):\n",
     "    rf = RandomForestRegressor(\n",
     "        n_estimators=300,\n",
-    "        n_jobs=-1,\n",
+    "        n_jobs=2,\n",
     "        random_state=42,\n",
     "    )\n",
     "    rf.fit(X_train, Y_train[:, i])\n",
     "    models_rf[t] = rf\n",
     "\n",
-    "print(\"Trained RF models:\", list(models_rf.keys()))\n"
+    "print(\"Trained RF models:\", list(models_rf.keys()))"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "056264a7",
+   "id": "53bab799",
    "metadata": {
     "papermill": {
-     "duration": 0.004403,
-     "end_time": "2026-01-06T19:08:17.026065",
+     "duration": 0.003873,
+     "end_time": "2026-01-23T01:12:07.491466",
      "exception": false,
-     "start_time": "2026-01-06T19:08:17.021662",
+     "start_time": "2026-01-23T01:12:07.487593",
      "status": "completed"
     },
     "tags": []
@@ -873,20 +840,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
-   "id": "9717b110",
+   "execution_count": 9,
+   "id": "b96df18f",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:08:17.036677Z",
-     "iopub.status.busy": "2026-01-06T19:08:17.036309Z",
-     "iopub.status.idle": "2026-01-06T19:08:17.771768Z",
-     "shell.execute_reply": "2026-01-06T19:08:17.770800Z"
+     "iopub.execute_input": "2026-01-23T01:12:07.502154Z",
+     "iopub.status.busy": "2026-01-23T01:12:07.501607Z",
+     "iopub.status.idle": "2026-01-23T01:12:08.112723Z",
+     "shell.execute_reply": "2026-01-23T01:12:08.111741Z"
     },
     "papermill": {
-     "duration": 0.74331,
-     "end_time": "2026-01-06T19:08:17.773651",
+     "duration": 0.618375,
+     "end_time": "2026-01-23T01:12:08.114613",
      "exception": false,
-     "start_time": "2026-01-06T19:08:17.030341",
+     "start_time": "2026-01-23T01:12:07.496238",
      "status": "completed"
     },
     "tags": []
@@ -896,7 +863,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "[CELL4] extract_features: 1 images | batch_size=64 | workers=0\n",
+      "[CELL4] extract_features: 1 images | batch_size=16 | workers=0\n",
       "[CELL4] Dataset init: 1 images\n",
       "[CELL4] Example path: /kaggle/input/csiro-biomass/test/ID1001187975.jpg\n",
       "[CELL4] total_batches=1\n",
@@ -937,31 +904,31 @@
        "      <th>0</th>\n",
        "      <td>test/ID1001187975.jpg</td>\n",
        "      <td>Dry_Clover_g</td>\n",
-       "      <td>1.059608</td>\n",
+       "      <td>3.565780</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>test/ID1001187975.jpg</td>\n",
        "      <td>Dry_Dead_g</td>\n",
-       "      <td>19.334812</td>\n",
+       "      <td>21.354683</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>test/ID1001187975.jpg</td>\n",
        "      <td>Dry_Green_g</td>\n",
-       "      <td>27.271936</td>\n",
+       "      <td>20.139318</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
        "      <td>test/ID1001187975.jpg</td>\n",
        "      <td>Dry_Total_g</td>\n",
-       "      <td>59.275982</td>\n",
+       "      <td>40.031811</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>test/ID1001187975.jpg</td>\n",
        "      <td>GDM_g</td>\n",
-       "      <td>38.999027</td>\n",
+       "      <td>21.055847</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
@@ -969,14 +936,14 @@
       ],
       "text/plain": [
        "              image_path   target_name     target\n",
-       "0  test/ID1001187975.jpg  Dry_Clover_g   1.059608\n",
-       "1  test/ID1001187975.jpg    Dry_Dead_g  19.334812\n",
-       "2  test/ID1001187975.jpg   Dry_Green_g  27.271936\n",
-       "3  test/ID1001187975.jpg   Dry_Total_g  59.275982\n",
-       "4  test/ID1001187975.jpg         GDM_g  38.999027"
+       "0  test/ID1001187975.jpg  Dry_Clover_g   3.565780\n",
+       "1  test/ID1001187975.jpg    Dry_Dead_g  21.354683\n",
+       "2  test/ID1001187975.jpg   Dry_Green_g  20.139318\n",
+       "3  test/ID1001187975.jpg   Dry_Total_g  40.031811\n",
+       "4  test/ID1001187975.jpg         GDM_g  21.055847"
       ]
      },
-     "execution_count": 10,
+     "execution_count": 9,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -992,7 +959,7 @@
     "unique_test_paths = test_df[\"image_path\"].drop_duplicates().tolist()\n",
     "unique_test_abs = [os.path.join(DATA_DIR, p) for p in unique_test_paths]\n",
     "\n",
-    "X_test = extract_features(unique_test_abs, batch_size=64)\n",
+    "X_test = extract_features(unique_test_abs, batch_size=16)\n",
     "print(\"X_test:\", X_test.shape)\n",
     "\n",
     "pred_matrix = np.zeros((len(unique_test_paths), len(TARGET_NAMES)), dtype=np.float32)\n",
@@ -1008,18 +975,18 @@
     "    value_name=\"target\"\n",
     ")\n",
     "\n",
-    "pred_long.head()\n"
+    "pred_long.head()"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "e9a90bcf",
+   "id": "9db845e6",
    "metadata": {
     "papermill": {
-     "duration": 0.004501,
-     "end_time": "2026-01-06T19:08:17.783787",
+     "duration": 0.004355,
+     "end_time": "2026-01-23T01:12:08.123638",
      "exception": false,
-     "start_time": "2026-01-06T19:08:17.779286",
+     "start_time": "2026-01-23T01:12:08.119283",
      "status": "completed"
     },
     "tags": []
@@ -1030,20 +997,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
-   "id": "b09b7981",
+   "execution_count": 10,
+   "id": "4ec3f506",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-06T19:08:17.795412Z",
-     "iopub.status.busy": "2026-01-06T19:08:17.795040Z",
-     "iopub.status.idle": "2026-01-06T19:08:17.823317Z",
-     "shell.execute_reply": "2026-01-06T19:08:17.821455Z"
+     "iopub.execute_input": "2026-01-23T01:12:08.134324Z",
+     "iopub.status.busy": "2026-01-23T01:12:08.133840Z",
+     "iopub.status.idle": "2026-01-23T01:12:08.156231Z",
+     "shell.execute_reply": "2026-01-23T01:12:08.155176Z"
     },
     "papermill": {
-     "duration": 0.037657,
-     "end_time": "2026-01-06T19:08:17.826113",
+     "duration": 0.030354,
+     "end_time": "2026-01-23T01:12:08.158301",
      "exception": false,
-     "start_time": "2026-01-06T19:08:17.788456",
+     "start_time": "2026-01-23T01:12:08.127947",
      "status": "completed"
     },
     "tags": []
@@ -1053,149 +1020,100 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Step 1: Validating pred_long...\n",
-      "Step 2: Reading raw test file from /kaggle/input/csiro-biomass/test.csv...\n",
-      "Step 3: Merging predictions onto raw test structure...\n",
-      "Step 4: Finalizing output columns...\n",
-      "[DEBUG] Missing target values (NaN) before fill: 0\n",
-      "Step 5: Saving submission to /kaggle/working/submission.csv ...\n",
-      "✅ Submission saved: /kaggle/working/submission.csv | shape=(5, 2)\n",
-      "✅ Kaggle artifact check passed: /kaggle/working/submission.csv exists\n"
+      "Step 1: Preparing submission directly from predictions...\n",
+      "Step 2: Constructing sample_id...\n",
+      "✅ Submission saved to: /kaggle/working/submission.csv\n",
+      "   Shape: (5, 2)\n",
+      "   Unique Targets: ['Dry_Clover_g' 'Dry_Dead_g' 'Dry_Green_g' 'Dry_Total_g' 'GDM_g']\n",
+      "   Head:\n",
+      "                    sample_id     target\n",
+      "0  ID1001187975__Dry_Clover_g   3.565780\n",
+      "1    ID1001187975__Dry_Dead_g  21.354683\n",
+      "2   ID1001187975__Dry_Green_g  20.139318\n",
+      "3   ID1001187975__Dry_Total_g  40.031811\n",
+      "4         ID1001187975__GDM_g  21.055847\n"
      ]
     }
    ],
    "source": [
-    "# ============================================\n",
-    "# CELL 8 — Submission Export (Kaggle-safe)\n",
-    "# Ensures /kaggle/working/submission.csv ALWAYS exists\n",
-    "# ============================================\n",
-    "\n",
-    "import os\n",
-    "import pandas as pd\n",
-    "\n",
     "SUBMISSION_PATH = \"/kaggle/working/submission.csv\"\n",
     "\n",
-    "def create_submission_file_from_pred_long(\n",
-    "    pred_long: pd.DataFrame,\n",
-    "    raw_test_path: str,\n",
-    "    output_path: str = SUBMISSION_PATH\n",
-    ") -> pd.DataFrame:\n",
-    "    \"\"\"\n",
-    "    Creates Kaggle submission in required long format:\n",
-    "      - reads raw test.csv to get exact sample_id ordering/structure\n",
-    "      - merges predictions on (image_path, target_name)\n",
-    "      - outputs columns: [sample_id, target]\n",
-    "      - saves to /kaggle/working/submission.csv\n",
-    "    \"\"\"\n",
-    "    print(\"Step 1: Validating pred_long...\")\n",
-    "    required_cols = {\"image_path\", \"target_name\", \"target\"}\n",
-    "    if pred_long is None or not isinstance(pred_long, pd.DataFrame):\n",
-    "        raise ValueError(\"pred_long is None or not a DataFrame.\")\n",
-    "    if not required_cols.issubset(pred_long.columns):\n",
-    "        raise ValueError(\n",
-    "            f\"pred_long must contain columns {sorted(required_cols)}. \"\n",
-    "            f\"Got: {list(pred_long.columns)}\"\n",
-    "        )\n",
+    "def generate_submission_direct(pred_long: pd.DataFrame, output_path: str = SUBMISSION_PATH):\n",
+    "    print(\"Step 1: Preparing submission directly from predictions...\")\n",
+    "    \n",
+    "    # We work on a copy to avoid SettingWithCopy warnings\n",
+    "    sub = pred_long.copy()\n",
+    "    \n",
+    "    # --- A. CLEAN THE ID ---\n",
+    "    # In Cell 3 (Hijack), we set image_path = \"test/image_01.jpg\"\n",
+    "    # We need just \"image_01\" for the sample_id.\n",
+    "    \n",
+    "    # 1. Strip directory prefix (get \"image_01.jpg\")\n",
+    "    sub['filename'] = sub['image_path'].apply(lambda x: os.path.basename(str(x)))\n",
+    "    \n",
+    "    # 2. Strip extension (get \"image_01\")\n",
+    "    sub['image_id'] = sub['filename'].apply(lambda x: os.path.splitext(x)[0])\n",
+    "    \n",
+    "    # --- B. CONSTRUCT SAMPLE_ID ---\n",
+    "    # Logic: {ImageID}__{TargetName}\n",
+    "    print(\"Step 2: Constructing sample_id...\")\n",
+    "    sub['sample_id'] = sub['image_id'] + \"__\" + sub['target_name']\n",
+    "    \n",
+    "    # --- C. CLIP NEGATIVES ---\n",
+    "    # (Incorporating the smart logic from your POC)\n",
+    "    num_negatives = (sub[\"target\"] < 0).sum()\n",
+    "    if num_negatives > 0:\n",
+    "        print(f\"⚠️ WARNING: Found {num_negatives} negative predictions. Clipping to 0.\")\n",
+    "        sub[\"target\"] = sub[\"target\"].clip(lower=0)\n",
+    "        \n",
+    "    # --- D. FINALIZE ---\n",
+    "    # Select ONLY the required columns\n",
+    "    final_output = sub[['sample_id', 'target']].copy()\n",
+    "    \n",
+    "    # Sort to be tidy (helps with debugging)\n",
+    "    final_output = final_output.sort_values('sample_id')\n",
+    "    \n",
+    "    # Safety Check: Do we have NaNs?\n",
+    "    if final_output['target'].isna().any():\n",
+    "        print(\"❌ CRITICAL: NaNs found in target. Filling with 0.\")\n",
+    "        final_output['target'] = final_output['target'].fillna(0)\n",
     "\n",
-    "    print(f\"Step 2: Reading raw test file from {raw_test_path}...\")\n",
-    "    raw_test = pd.read_csv(raw_test_path)\n",
-    "\n",
-    "    needed = {\"sample_id\", \"image_path\", \"target_name\"}\n",
-    "    if not needed.issubset(raw_test.columns):\n",
-    "        raise ValueError(\n",
-    "            f\"test.csv must contain columns {sorted(needed)}. \"\n",
-    "            f\"Got: {list(raw_test.columns)}\"\n",
-    "        )\n",
-    "\n",
-    "    print(\"Step 3: Merging predictions onto raw test structure...\")\n",
-    "    final_submission = pd.merge(\n",
-    "        raw_test[[\"sample_id\", \"image_path\", \"target_name\"]],\n",
-    "        pred_long[[\"image_path\", \"target_name\", \"target\"]],\n",
-    "        on=[\"image_path\", \"target_name\"],\n",
-    "        how=\"left\"\n",
-    "    )\n",
-    "\n",
-    "    print(\"Step 4: Finalizing output columns...\")\n",
-    "    final_output = final_submission[[\"sample_id\", \"target\"]].copy()\n",
-    "\n",
-    "    # Safety: fill missing predictions with 0 (and report how many)\n",
-    "    missing = final_output[\"target\"].isna().sum()\n",
-    "    print(\"[DEBUG] Missing target values (NaN) before fill:\", int(missing))\n",
-    "    final_output[\"target\"] = final_output[\"target\"].fillna(0).astype(float)\n",
-    "\n",
-    "    # IMPORTANT: create output directory and write the exact file name\n",
+    "    # --- E. SAVE ---\n",
     "    os.makedirs(os.path.dirname(output_path), exist_ok=True)\n",
-    "\n",
-    "    print(f\"Step 5: Saving submission to {output_path} ...\")\n",
     "    final_output.to_csv(output_path, index=False)\n",
-    "\n",
-    "    # Hard check: Kaggle needs this file to exist in /kaggle/working\n",
-    "    if not os.path.exists(output_path):\n",
-    "        raise RuntimeError(f\"Submission file was not created at {output_path}\")\n",
-    "\n",
-    "    print(f\"✅ Submission saved: {output_path} | shape={final_output.shape}\")\n",
+    "    \n",
+    "    print(f\"✅ Submission saved to: {output_path}\")\n",
+    "    print(f\"   Shape: {final_output.shape}\")\n",
+    "    print(f\"   Unique Targets: {sub['target_name'].unique()}\")\n",
+    "    print(\"   Head:\")\n",
+    "    print(final_output.head())\n",
+    "    \n",
     "    return final_output\n",
     "\n",
-    "\n",
-    "def _write_dummy_submission(raw_test_path: str, output_path: str = SUBMISSION_PATH) -> pd.DataFrame:\n",
-    "    \"\"\"Always writes a minimal valid submission.csv to avoid Kaggle 'missing output' errors.\"\"\"\n",
-    "    os.makedirs(os.path.dirname(output_path), exist_ok=True)\n",
-    "    sub = pd.read_csv(raw_test_path)[[\"sample_id\"]].copy()\n",
-    "    sub[\"target\"] = 0.0\n",
-    "    sub.to_csv(output_path, index=False)\n",
-    "    print(f\"✅ Dummy submission saved: {output_path} | shape={sub.shape}\")\n",
-    "    return sub\n",
-    "\n",
-    "\n",
-    "# --- EXECUTE (Kaggle-safe wrapper) ---\n",
-    "# Key change: we ALWAYS ensure submission.csv exists even if upstream failed.\n",
+    "# --- EXECUTE ---\n",
     "try:\n",
-    "    submission = create_submission_file_from_pred_long(\n",
-    "        pred_long=pred_long,\n",
-    "        raw_test_path=TEST_CSV,\n",
-    "        output_path=SUBMISSION_PATH\n",
-    "    )\n",
+    "    submission = generate_submission_direct(pred_long, SUBMISSION_PATH)\n",
     "except Exception as e:\n",
-    "    print(f\"❌ Error generating submission from predictions: {e}\")\n",
-    "    submission = _write_dummy_submission(TEST_CSV, SUBMISSION_PATH)\n",
-    "\n",
-    "# Final assert for Kaggle artifact detection\n",
-    "assert os.path.exists(SUBMISSION_PATH), f\"submission.csv missing at {SUBMISSION_PATH}\"\n",
-    "print(\"✅ Kaggle artifact check passed: /kaggle/working/submission.csv exists\")\n"
+    "    print(f\"❌ Error generating submission: {e}\")\n",
+    "    # Optional: If you want a crash-safe dummy fallback, add it here.\n",
+    "    # But for now, it's better to see the error."
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "b0ec06c9",
+   "id": "0f9e50da",
    "metadata": {
     "papermill": {
-     "duration": 0.005276,
-     "end_time": "2026-01-06T19:08:17.836575",
+     "duration": 0.004501,
+     "end_time": "2026-01-23T01:12:08.167830",
      "exception": false,
-     "start_time": "2026-01-06T19:08:17.831299",
+     "start_time": "2026-01-23T01:12:08.163329",
      "status": "completed"
     },
     "tags": []
    },
    "source": [
-    "---"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "d6dc337e",
-   "metadata": {
-    "papermill": {
-     "duration": 0.004566,
-     "end_time": "2026-01-06T19:08:17.845964",
-     "exception": false,
-     "start_time": "2026-01-06T19:08:17.841398",
-     "status": "completed"
-    },
-    "tags": []
-   },
-   "source": [
-    "## SIDE NOTES"
+    "#"
    ]
   }
  ],
@@ -1239,14 +1157,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 162.906607,
-   "end_time": "2026-01-06T19:08:20.456911",
+   "duration": 202.507297,
+   "end_time": "2026-01-23T01:12:11.218889",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-01-06T19:05:37.550304",
+   "start_time": "2026-01-23T01:08:48.711592",
    "version": "2.6.0"
   }
  },
