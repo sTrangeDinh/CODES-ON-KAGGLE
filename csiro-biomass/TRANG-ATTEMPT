@@ -2,13 +2,13 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "0432c6ec",
+   "id": "757a1209",
    "metadata": {
     "papermill": {
-     "duration": 0.004875,
-     "end_time": "2026-01-24T06:36:23.236164",
+     "duration": 0.00507,
+     "end_time": "2026-01-24T07:03:48.691355",
      "exception": false,
-     "start_time": "2026-01-24T06:36:23.231289",
+     "start_time": "2026-01-24T07:03:48.686285",
      "status": "completed"
     },
     "tags": []
@@ -20,19 +20,19 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "5457f5a8",
+   "id": "3931e89d",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:23.244966Z",
-     "iopub.status.busy": "2026-01-24T06:36:23.244655Z",
-     "iopub.status.idle": "2026-01-24T06:36:35.481336Z",
-     "shell.execute_reply": "2026-01-24T06:36:35.480505Z"
+     "iopub.execute_input": "2026-01-24T07:03:48.700362Z",
+     "iopub.status.busy": "2026-01-24T07:03:48.700063Z",
+     "iopub.status.idle": "2026-01-24T07:04:01.156661Z",
+     "shell.execute_reply": "2026-01-24T07:04:01.155900Z"
     },
     "papermill": {
-     "duration": 12.242996,
-     "end_time": "2026-01-24T06:36:35.482929",
+     "duration": 12.463158,
+     "end_time": "2026-01-24T07:04:01.158285",
      "exception": false,
-     "start_time": "2026-01-24T06:36:23.239933",
+     "start_time": "2026-01-24T07:03:48.695127",
      "status": "completed"
     },
     "tags": []
@@ -117,44 +117,101 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "824abf73",
+   "id": "fd364788",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:35.492219Z",
-     "iopub.status.busy": "2026-01-24T06:36:35.491490Z",
-     "iopub.status.idle": "2026-01-24T06:36:35.495201Z",
-     "shell.execute_reply": "2026-01-24T06:36:35.494441Z"
+     "iopub.execute_input": "2026-01-24T07:04:01.167609Z",
+     "iopub.status.busy": "2026-01-24T07:04:01.166885Z",
+     "iopub.status.idle": "2026-01-24T07:04:01.174658Z",
+     "shell.execute_reply": "2026-01-24T07:04:01.173886Z"
     },
     "papermill": {
-     "duration": 0.00982,
-     "end_time": "2026-01-24T06:36:35.496735",
+     "duration": 0.013604,
+     "end_time": "2026-01-24T07:04:01.175910",
      "exception": false,
-     "start_time": "2026-01-24T06:36:35.486915",
+     "start_time": "2026-01-24T07:04:01.162306",
      "status": "completed"
     },
     "tags": []
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "✅ SquarePad + build_letterbox_resize_transform ready.\n"
+     ]
+    }
+   ],
    "source": [
     "# ============================================\n",
-    "# CELL 1.5 — Letterboxing REMOVED\n",
+    "# CELL 1.5  Optimized SquarePad (Letterbox) + Resize\n",
     "# ============================================\n",
-    "# IMPORTANT:\n",
-    "# - Letterboxing (pad-to-square / resize-with-padding) has been removed/disabled entirely.\n",
-    "# - No SquarePad / Pad / keep-aspect-ratio+pad is used anywhere in transforms.\n",
-    "# - All pipelines use RESIZE-ONLY: Resize((IMG_SIZE, IMG_SIZE)) with existing ToTensor/Normalize.\n",
-    "pass\n"
+    "import torchvision.transforms.functional as F\n",
+    "\n",
+    "class SquarePad:\n",
+    "    \"\"\"\n",
+    "    Letterbox to square by symmetric padding (constant fill).\n",
+    "    Works with PIL.Image inputs.\n",
+    "    \"\"\"\n",
+    "    def __init__(self, fill=0, padding_mode=\"constant\"):\n",
+    "        self.fill = fill\n",
+    "        self.padding_mode = padding_mode\n",
+    "\n",
+    "    def __call__(self, img):\n",
+    "        # PIL.Image: size = (W, H)\n",
+    "        w, h = img.size\n",
+    "        if w == h:\n",
+    "            return img  # fast path\n",
+    "\n",
+    "        max_wh = w if w > h else h\n",
+    "        pad_left = (max_wh - w) // 2\n",
+    "        pad_top  = (max_wh - h) // 2\n",
+    "        pad_right  = max_wh - w - pad_left\n",
+    "        pad_bottom = max_wh - h - pad_top\n",
+    "\n",
+    "        # torchvision expects padding as (left, top, right, bottom)\n",
+    "        return F.pad(\n",
+    "            img,\n",
+    "            (pad_left, pad_top, pad_right, pad_bottom),\n",
+    "            fill=self.fill,\n",
+    "            padding_mode=self.padding_mode,\n",
+    "        )\n",
+    "\n",
+    "def build_letterbox_resize_transform(\n",
+    "    img_size,\n",
+    "    mean=(0.485, 0.456, 0.406),\n",
+    "    std=(0.229, 0.224, 0.225),\n",
+    "    fill=0,\n",
+    "):\n",
+    "    \"\"\"\n",
+    "    SquarePad(letterbox) -> Resize -> ToTensor -> Normalize\n",
+    "    \"\"\"\n",
+    "    # Robust interpolation handling across torchvision versions\n",
+    "    try:\n",
+    "        interp = transforms.InterpolationMode.BILINEAR\n",
+    "    except AttributeError:\n",
+    "        interp = Image.BILINEAR\n",
+    "\n",
+    "    return transforms.Compose([\n",
+    "        SquarePad(fill=fill, padding_mode=\"constant\"),\n",
+    "        transforms.Resize((img_size, img_size), interpolation=interp),\n",
+    "        transforms.ToTensor(),\n",
+    "        transforms.Normalize(mean=mean, std=std),\n",
+    "    ])\n",
+    "\n",
+    "print(\"✅ SquarePad + build_letterbox_resize_transform ready.\")\n"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "eaba23c5",
+   "id": "32eba87b",
    "metadata": {
     "papermill": {
-     "duration": 0.003632,
-     "end_time": "2026-01-24T06:36:35.503979",
+     "duration": 0.00366,
+     "end_time": "2026-01-24T07:04:01.183288",
      "exception": false,
-     "start_time": "2026-01-24T06:36:35.500347",
+     "start_time": "2026-01-24T07:04:01.179628",
      "status": "completed"
     },
     "tags": []
@@ -169,19 +226,19 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "29699fe3",
+   "id": "46d032f0",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:35.512160Z",
-     "iopub.status.busy": "2026-01-24T06:36:35.511866Z",
-     "iopub.status.idle": "2026-01-24T06:36:36.875219Z",
-     "shell.execute_reply": "2026-01-24T06:36:36.874350Z"
+     "iopub.execute_input": "2026-01-24T07:04:01.191793Z",
+     "iopub.status.busy": "2026-01-24T07:04:01.191476Z",
+     "iopub.status.idle": "2026-01-24T07:04:02.655646Z",
+     "shell.execute_reply": "2026-01-24T07:04:02.654802Z"
     },
     "papermill": {
-     "duration": 1.369474,
-     "end_time": "2026-01-24T06:36:36.876931",
+     "duration": 1.470335,
+     "end_time": "2026-01-24T07:04:02.657248",
      "exception": false,
-     "start_time": "2026-01-24T06:36:35.507457",
+     "start_time": "2026-01-24T07:04:01.186913",
      "status": "completed"
     },
     "tags": []
@@ -202,6 +259,7 @@
    "source": [
     "# ============================================\n",
     "# CELL 2a — Model / Weights Setup (ResNet18 offline) + Robust Loader + Debug Prints\n",
+    "# (UPDATED: uses optimized SquarePad(letterbox)+Resize transform builder)\n",
     "# ============================================\n",
     "def find_resnet18_weights(weights_dir: str) -> str:\n",
     "    print(\"[DEBUG] weights_dir:\", weights_dir)\n",
@@ -239,7 +297,6 @@
     "    if isinstance(obj, dict):\n",
     "        if \"state_dict\" in obj and isinstance(obj[\"state_dict\"], dict):\n",
     "            return obj[\"state_dict\"]\n",
-    "        # If it already looks like a state_dict\n",
     "        if all(isinstance(k, str) for k in obj.keys()):\n",
     "            return obj\n",
     "    raise TypeError(f\"Unsupported checkpoint type: {type(obj)}\")\n",
@@ -268,15 +325,13 @@
     "    for p in extractor.parameters():\n",
     "        p.requires_grad = False\n",
     "\n",
-    "    # ✅ Resize-only (no padding / no cropping)\n",
-    "    tfm = transforms.Compose([\n",
-    "        transforms.Resize((IMG_SIZE, IMG_SIZE)),\n",
-    "        transforms.ToTensor(),\n",
-    "        transforms.Normalize(\n",
-    "            mean=(0.485, 0.456, 0.406),\n",
-    "            std=(0.229, 0.224, 0.225),\n",
-    "        ),\n",
-    "    ])\n",
+    "    # ✅ Letterboxing enabled (optimized): SquarePad -> Resize -> ToTensor -> Normalize\n",
+    "    tfm = build_letterbox_resize_transform(\n",
+    "        IMG_SIZE,\n",
+    "        mean=(0.485, 0.456, 0.406),\n",
+    "        std=(0.229, 0.224, 0.225),\n",
+    "        fill=0,\n",
+    "    )\n",
     "    return extractor, tfm\n",
     "\n",
     "EXTRACTOR, IMG_TFM = build_resnet18_feature_extractor(RESNET18_WEIGHTS, DEVICE)\n",
@@ -286,19 +341,19 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "b03090c0",
+   "id": "cdab73ca",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:36.887615Z",
-     "iopub.status.busy": "2026-01-24T06:36:36.887182Z",
-     "iopub.status.idle": "2026-01-24T06:36:37.173017Z",
-     "shell.execute_reply": "2026-01-24T06:36:37.172218Z"
+     "iopub.execute_input": "2026-01-24T07:04:02.666786Z",
+     "iopub.status.busy": "2026-01-24T07:04:02.666458Z",
+     "iopub.status.idle": "2026-01-24T07:04:02.943017Z",
+     "shell.execute_reply": "2026-01-24T07:04:02.942196Z"
     },
     "papermill": {
-     "duration": 0.29297,
-     "end_time": "2026-01-24T06:36:37.174516",
+     "duration": 0.283113,
+     "end_time": "2026-01-24T07:04:02.944474",
      "exception": false,
-     "start_time": "2026-01-24T06:36:36.881546",
+     "start_time": "2026-01-24T07:04:02.661361",
      "status": "completed"
     },
     "tags": []
@@ -319,7 +374,7 @@
    "source": [
     "# ============================================\n",
     "# CELL 2b — Model / Weights Setup (ResNet18 offline) + Robust Loader + Debug Prints\n",
-    "# (Duplicated in Notebook A — preserved as-is structurally, with the same resize-only fix)\n",
+    "# (Duplicated in Notebook A — UPDATED: uses optimized SquarePad(letterbox)+Resize transform builder)\n",
     "# ============================================\n",
     "def find_resnet18_weights(weights_dir: str) -> str:\n",
     "    print(\"[DEBUG] weights_dir:\", weights_dir)\n",
@@ -357,7 +412,6 @@
     "    if isinstance(obj, dict):\n",
     "        if \"state_dict\" in obj and isinstance(obj[\"state_dict\"], dict):\n",
     "            return obj[\"state_dict\"]\n",
-    "        # If it already looks like a state_dict\n",
     "        if all(isinstance(k, str) for k in obj.keys()):\n",
     "            return obj\n",
     "    raise TypeError(f\"Unsupported checkpoint type: {type(obj)}\")\n",
@@ -386,15 +440,13 @@
     "    for p in extractor.parameters():\n",
     "        p.requires_grad = False\n",
     "\n",
-    "    # ✅ Resize-only (no padding / no cropping)\n",
-    "    tfm = transforms.Compose([\n",
-    "        transforms.Resize((IMG_SIZE, IMG_SIZE)),\n",
-    "        transforms.ToTensor(),\n",
-    "        transforms.Normalize(\n",
-    "            mean=(0.485, 0.456, 0.406),\n",
-    "            std=(0.229, 0.224, 0.225),\n",
-    "        ),\n",
-    "    ])\n",
+    "    # ✅ Letterboxing enabled (optimized): SquarePad -> Resize -> ToTensor -> Normalize\n",
+    "    tfm = build_letterbox_resize_transform(\n",
+    "        IMG_SIZE,\n",
+    "        mean=(0.485, 0.456, 0.406),\n",
+    "        std=(0.229, 0.224, 0.225),\n",
+    "        fill=0,\n",
+    "    )\n",
     "    return extractor, tfm\n",
     "\n",
     "EXTRACTOR, IMG_TFM = build_resnet18_feature_extractor(RESNET18_WEIGHTS, DEVICE)\n",
@@ -404,19 +456,19 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "id": "234c7386",
+   "id": "f4b618b4",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:37.183994Z",
-     "iopub.status.busy": "2026-01-24T06:36:37.183465Z",
-     "iopub.status.idle": "2026-01-24T06:36:37.188780Z",
-     "shell.execute_reply": "2026-01-24T06:36:37.188148Z"
+     "iopub.execute_input": "2026-01-24T07:04:02.953968Z",
+     "iopub.status.busy": "2026-01-24T07:04:02.953489Z",
+     "iopub.status.idle": "2026-01-24T07:04:02.958565Z",
+     "shell.execute_reply": "2026-01-24T07:04:02.957962Z"
     },
     "papermill": {
-     "duration": 0.011654,
-     "end_time": "2026-01-24T06:36:37.190287",
+     "duration": 0.011344,
+     "end_time": "2026-01-24T07:04:02.959964",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.178633",
+     "start_time": "2026-01-24T07:04:02.948620",
      "status": "completed"
     },
     "tags": []
@@ -426,14 +478,14 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "✅ Defined get_tta_transforms() for validation/inference-only TTA (resize-only).\n"
+      "✅ get_tta_transforms() updated to SquarePad(letterbox)+Resize pipeline.\n"
      ]
     }
    ],
    "source": [
     "# ============================================\n",
     "# CELL 2.5 — AUGMENTATIONS — TTA Views (validation/inference-only)\n",
-    "# (Integrated from LB-0-57-CODE idea: original/hflip/vflip)\n",
+    "# (UPDATED: uses optimized SquarePad(letterbox)+Resize transform builder)\n",
     "# ============================================\n",
     "def get_tta_transforms():\n",
     "    \"\"\"\n",
@@ -441,47 +493,44 @@
     "    Each pipeline is a different \"view\" of the image.\n",
     "    NOTE: Applied ONLY for validation/inference (not training).\n",
     "    \"\"\"\n",
-    "    # Base pipeline mirrors IMG_TFM normalization config.\n",
-    "    base_transforms = [\n",
-    "        transforms.Resize((IMG_SIZE, IMG_SIZE)),  # ✅ resize-only (no pad, no crop)\n",
-    "        transforms.ToTensor(),\n",
-    "        transforms.Normalize(\n",
-    "            mean=(0.485, 0.456, 0.406),\n",
-    "            std=(0.229, 0.224, 0.225),\n",
-    "        ),\n",
-    "    ]\n",
+    "\n",
+    "    # Build base (letterbox+resize+tensor+normalize) once, then reuse\n",
+    "    base = build_letterbox_resize_transform(\n",
+    "        IMG_SIZE,\n",
+    "        mean=(0.485, 0.456, 0.406),\n",
+    "        std=(0.229, 0.224, 0.225),\n",
+    "        fill=0,\n",
+    "    )\n",
     "\n",
     "    # View 1: Original\n",
-    "    original_view = transforms.Compose([\n",
-    "        *base_transforms\n",
-    "    ])\n",
+    "    original_view = base\n",
     "\n",
-    "    # View 2: Horizontal Flip (always)\n",
+    "    # View 2: Horizontal Flip (always) + base\n",
     "    hflip_view = transforms.Compose([\n",
     "        transforms.RandomHorizontalFlip(p=1.0),\n",
-    "        *base_transforms\n",
+    "        *base.transforms,\n",
     "    ])\n",
     "\n",
-    "    # View 3: Vertical Flip (always)\n",
+    "    # View 3: Vertical Flip (always) + base\n",
     "    vflip_view = transforms.Compose([\n",
     "        transforms.RandomVerticalFlip(p=1.0),\n",
-    "        *base_transforms\n",
+    "        *base.transforms,\n",
     "    ])\n",
     "\n",
     "    return [original_view, hflip_view, vflip_view]\n",
     "\n",
-    "print(\"✅ Defined get_tta_transforms() for validation/inference-only TTA (resize-only).\")"
+    "print(\"✅ get_tta_transforms() updated to SquarePad(letterbox)+Resize pipeline.\")"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "034fa749",
+   "id": "61940182",
    "metadata": {
     "papermill": {
-     "duration": 0.003803,
-     "end_time": "2026-01-24T06:36:37.197926",
+     "duration": 0.003872,
+     "end_time": "2026-01-24T07:04:02.967719",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.194123",
+     "start_time": "2026-01-24T07:04:02.963847",
      "status": "completed"
     },
     "tags": []
@@ -493,19 +542,19 @@
   {
    "cell_type": "code",
    "execution_count": 6,
-   "id": "1ae3fb92",
+   "id": "2372fa4d",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:37.206708Z",
-     "iopub.status.busy": "2026-01-24T06:36:37.206474Z",
-     "iopub.status.idle": "2026-01-24T06:36:37.278498Z",
-     "shell.execute_reply": "2026-01-24T06:36:37.277650Z"
+     "iopub.execute_input": "2026-01-24T07:04:02.976763Z",
+     "iopub.status.busy": "2026-01-24T07:04:02.976533Z",
+     "iopub.status.idle": "2026-01-24T07:04:03.047072Z",
+     "shell.execute_reply": "2026-01-24T07:04:03.046258Z"
     },
     "papermill": {
-     "duration": 0.078368,
-     "end_time": "2026-01-24T06:36:37.280121",
+     "duration": 0.076768,
+     "end_time": "2026-01-24T07:04:03.048428",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.201753",
+     "start_time": "2026-01-24T07:04:02.971660",
      "status": "completed"
     },
     "tags": []
@@ -625,13 +674,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "3e92f42e",
+   "id": "3660c0d4",
    "metadata": {
     "papermill": {
-     "duration": 0.004244,
-     "end_time": "2026-01-24T06:36:37.288660",
+     "duration": 0.004148,
+     "end_time": "2026-01-24T07:04:03.056760",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.284416",
+     "start_time": "2026-01-24T07:04:03.052612",
      "status": "completed"
     },
     "tags": []
@@ -643,19 +692,19 @@
   {
    "cell_type": "code",
    "execution_count": 7,
-   "id": "4fa3137b",
+   "id": "00b4a0be",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:37.298082Z",
-     "iopub.status.busy": "2026-01-24T06:36:37.297269Z",
-     "iopub.status.idle": "2026-01-24T06:36:37.306313Z",
-     "shell.execute_reply": "2026-01-24T06:36:37.305754Z"
+     "iopub.execute_input": "2026-01-24T07:04:03.066557Z",
+     "iopub.status.busy": "2026-01-24T07:04:03.065808Z",
+     "iopub.status.idle": "2026-01-24T07:04:03.074743Z",
+     "shell.execute_reply": "2026-01-24T07:04:03.074241Z"
     },
     "papermill": {
-     "duration": 0.015144,
-     "end_time": "2026-01-24T06:36:37.307627",
+     "duration": 0.015314,
+     "end_time": "2026-01-24T07:04:03.076042",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.292483",
+     "start_time": "2026-01-24T07:04:03.060728",
      "status": "completed"
     },
     "tags": []
@@ -729,13 +778,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "d6b4ad1d",
+   "id": "cfb781a1",
    "metadata": {
     "papermill": {
-     "duration": 0.004686,
-     "end_time": "2026-01-24T06:36:37.316225",
+     "duration": 0.004591,
+     "end_time": "2026-01-24T07:04:03.084476",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.311539",
+     "start_time": "2026-01-24T07:04:03.079885",
      "status": "completed"
     },
     "tags": []
@@ -747,19 +796,19 @@
   {
    "cell_type": "code",
    "execution_count": 8,
-   "id": "e4abcf4c",
+   "id": "596bbb1f",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:36:37.325055Z",
-     "iopub.status.busy": "2026-01-24T06:36:37.324559Z",
-     "iopub.status.idle": "2026-01-24T06:37:03.005245Z",
-     "shell.execute_reply": "2026-01-24T06:37:03.004354Z"
+     "iopub.execute_input": "2026-01-24T07:04:03.093790Z",
+     "iopub.status.busy": "2026-01-24T07:04:03.093371Z",
+     "iopub.status.idle": "2026-01-24T07:04:37.993412Z",
+     "shell.execute_reply": "2026-01-24T07:04:37.992438Z"
     },
     "papermill": {
-     "duration": 25.686955,
-     "end_time": "2026-01-24T06:37:03.006946",
+     "duration": 34.906215,
+     "end_time": "2026-01-24T07:04:37.994916",
      "exception": false,
-     "start_time": "2026-01-24T06:36:37.319991",
+     "start_time": "2026-01-24T07:04:03.088701",
      "status": "completed"
     },
     "tags": []
@@ -804,13 +853,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e1dc843f",
+   "id": "a2f78620",
    "metadata": {
     "papermill": {
-     "duration": 0.00459,
-     "end_time": "2026-01-24T06:37:03.016397",
+     "duration": 0.004257,
+     "end_time": "2026-01-24T07:04:38.003686",
      "exception": false,
-     "start_time": "2026-01-24T06:37:03.011807",
+     "start_time": "2026-01-24T07:04:37.999429",
      "status": "completed"
     },
     "tags": []
@@ -822,19 +871,19 @@
   {
    "cell_type": "code",
    "execution_count": 9,
-   "id": "d6bf002c",
+   "id": "a9f005ff",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:37:03.025968Z",
-     "iopub.status.busy": "2026-01-24T06:37:03.025697Z",
-     "iopub.status.idle": "2026-01-24T06:38:06.999372Z",
-     "shell.execute_reply": "2026-01-24T06:38:06.998596Z"
+     "iopub.execute_input": "2026-01-24T07:04:38.013313Z",
+     "iopub.status.busy": "2026-01-24T07:04:38.013045Z",
+     "iopub.status.idle": "2026-01-24T07:05:36.581478Z",
+     "shell.execute_reply": "2026-01-24T07:05:36.580690Z"
     },
     "papermill": {
-     "duration": 63.984803,
-     "end_time": "2026-01-24T06:38:07.005350",
+     "duration": 58.57901,
+     "end_time": "2026-01-24T07:05:36.586830",
      "exception": false,
-     "start_time": "2026-01-24T06:37:03.020547",
+     "start_time": "2026-01-24T07:04:38.007820",
      "status": "completed"
     },
     "tags": []
@@ -868,13 +917,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "52a2a2de",
+   "id": "00a5e8c7",
    "metadata": {
     "papermill": {
-     "duration": 0.004143,
-     "end_time": "2026-01-24T06:38:07.013751",
+     "duration": 0.004355,
+     "end_time": "2026-01-24T07:05:36.595535",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.009608",
+     "start_time": "2026-01-24T07:05:36.591180",
      "status": "completed"
     },
     "tags": []
@@ -886,19 +935,19 @@
   {
    "cell_type": "code",
    "execution_count": 10,
-   "id": "2e201a94",
+   "id": "78fa4f4c",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:38:07.023566Z",
-     "iopub.status.busy": "2026-01-24T06:38:07.023226Z",
-     "iopub.status.idle": "2026-01-24T06:38:07.881456Z",
-     "shell.execute_reply": "2026-01-24T06:38:07.880888Z"
+     "iopub.execute_input": "2026-01-24T07:05:36.605756Z",
+     "iopub.status.busy": "2026-01-24T07:05:36.605497Z",
+     "iopub.status.idle": "2026-01-24T07:05:37.499885Z",
+     "shell.execute_reply": "2026-01-24T07:05:37.499330Z"
     },
     "papermill": {
-     "duration": 0.865224,
-     "end_time": "2026-01-24T06:38:07.883082",
+     "duration": 0.901522,
+     "end_time": "2026-01-24T07:05:37.501518",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.017858",
+     "start_time": "2026-01-24T07:05:36.599996",
      "status": "completed"
     },
     "tags": []
@@ -1009,13 +1058,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "3ec015f4",
+   "id": "93447162",
    "metadata": {
     "papermill": {
-     "duration": 0.004526,
-     "end_time": "2026-01-24T06:38:07.892223",
+     "duration": 0.004446,
+     "end_time": "2026-01-24T07:05:37.510656",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.887697",
+     "start_time": "2026-01-24T07:05:37.506210",
      "status": "completed"
     },
     "tags": []
@@ -1027,19 +1076,19 @@
   {
    "cell_type": "code",
    "execution_count": 11,
-   "id": "f6ad070f",
+   "id": "bde66129",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:38:07.902212Z",
-     "iopub.status.busy": "2026-01-24T06:38:07.901757Z",
-     "iopub.status.idle": "2026-01-24T06:38:07.922409Z",
-     "shell.execute_reply": "2026-01-24T06:38:07.921574Z"
+     "iopub.execute_input": "2026-01-24T07:05:37.521120Z",
+     "iopub.status.busy": "2026-01-24T07:05:37.520533Z",
+     "iopub.status.idle": "2026-01-24T07:05:37.540804Z",
+     "shell.execute_reply": "2026-01-24T07:05:37.540013Z"
     },
     "papermill": {
-     "duration": 0.027408,
-     "end_time": "2026-01-24T06:38:07.923957",
+     "duration": 0.02699,
+     "end_time": "2026-01-24T07:05:37.542231",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.896549",
+     "start_time": "2026-01-24T07:05:37.515241",
      "status": "completed"
     },
     "tags": []
@@ -1056,11 +1105,11 @@
       "   Unique Targets: ['Dry_Green_g' 'Dry_Dead_g' 'Dry_Clover_g' 'GDM_g' 'Dry_Total_g']\n",
       "   Head:\n",
       "                    sample_id     target\n",
-      "2  ID1001187975__Dry_Clover_g   5.321133\n",
-      "1    ID1001187975__Dry_Dead_g  21.870434\n",
-      "0   ID1001187975__Dry_Green_g  24.901474\n",
-      "4   ID1001187975__Dry_Total_g  52.093040\n",
-      "3         ID1001187975__GDM_g  30.222607\n"
+      "2  ID1001187975__Dry_Clover_g   0.000000\n",
+      "1    ID1001187975__Dry_Dead_g  19.859241\n",
+      "0   ID1001187975__Dry_Green_g  21.688047\n",
+      "4   ID1001187975__Dry_Total_g  39.719997\n",
+      "3         ID1001187975__GDM_g  19.860756\n"
      ]
     }
    ],
@@ -1131,13 +1180,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "5256c892",
+   "id": "072ecdbb",
    "metadata": {
     "papermill": {
-     "duration": 0.004317,
-     "end_time": "2026-01-24T06:38:07.933066",
+     "duration": 0.004418,
+     "end_time": "2026-01-24T07:05:37.551069",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.928749",
+     "start_time": "2026-01-24T07:05:37.546651",
      "status": "completed"
     },
     "tags": []
@@ -1149,19 +1198,19 @@
   {
    "cell_type": "code",
    "execution_count": 12,
-   "id": "7b03e9a6",
+   "id": "f19456f3",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:38:07.943225Z",
-     "iopub.status.busy": "2026-01-24T06:38:07.942812Z",
-     "iopub.status.idle": "2026-01-24T06:38:08.360168Z",
-     "shell.execute_reply": "2026-01-24T06:38:08.359284Z"
+     "iopub.execute_input": "2026-01-24T07:05:37.562295Z",
+     "iopub.status.busy": "2026-01-24T07:05:37.562072Z",
+     "iopub.status.idle": "2026-01-24T07:05:38.043692Z",
+     "shell.execute_reply": "2026-01-24T07:05:38.042953Z"
     },
     "papermill": {
-     "duration": 0.4241,
-     "end_time": "2026-01-24T06:38:08.361599",
+     "duration": 0.489811,
+     "end_time": "2026-01-24T07:05:38.045339",
      "exception": false,
-     "start_time": "2026-01-24T06:38:07.937499",
+     "start_time": "2026-01-24T07:05:37.555528",
      "status": "completed"
     },
     "tags": []
@@ -1265,13 +1314,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "a011bcbd",
+   "id": "e281bbec",
    "metadata": {
     "papermill": {
-     "duration": 0.004382,
-     "end_time": "2026-01-24T06:38:08.370768",
+     "duration": 0.004739,
+     "end_time": "2026-01-24T07:05:38.055165",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.366386",
+     "start_time": "2026-01-24T07:05:38.050426",
      "status": "completed"
     },
     "tags": []
@@ -1282,13 +1331,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e492b985",
+   "id": "afaebf68",
    "metadata": {
     "papermill": {
-     "duration": 0.004524,
-     "end_time": "2026-01-24T06:38:08.379998",
+     "duration": 0.004551,
+     "end_time": "2026-01-24T07:05:38.064350",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.375474",
+     "start_time": "2026-01-24T07:05:38.059799",
      "status": "completed"
     },
     "tags": []
@@ -1296,47 +1345,64 @@
    "source": [
     "# Change log\n",
     "\n",
-    "## Modified cells\n",
-    "- **Cell 2 (Letterboxing REMOVED)**\n",
-    "  - Removed/disabled letterboxing behavior (no pad-to-square, no keep-aspect-ratio + pad).\n",
-    "- **Cells 3–4 (ResNet18 feature extractor transforms)**\n",
-    "  - Replaced `SquarePad() + Resize(...)` with **resize-only**: `Resize((IMG_SIZE, IMG_SIZE))`, keeping `ToTensor()` and `Normalize(...)` unchanged.\n",
-    "- **Cell 5 (TTA transforms)**\n",
-    "  - Replaced padding-based preprocessing with **resize-only** in all TTA views (original / hflip / vflip).\n",
-    "- **Cells 6–11 (Core Strategy integration)**\n",
-    "  - Implemented **3-target training** (`Dry_Total_g`, `GDM_g`, `Dry_Green_g`) via `CORE_TARGET_NAMES`.\n",
-    "  - During inference, reconstructed the remaining 2 targets using LB-0-57 logic:\n",
-    "    - `Dry_Clover_g = max(0, GDM_g - Dry_Green_g)`\n",
-    "    - `Dry_Dead_g   = max(0, Dry_Total_g - GDM_g)`\n",
-    "  - Ensured submission still outputs **all 5 targets** with correct target names.\n",
+    "## Kaggle version name (suggested)\n",
+    "- **kaggle_trang_attempt_current_v3_letterbox_core3_reconstruct5_tta**\n",
     "\n",
-    "## Added/required cells\n",
-    "- **Cell 12 (Sanity checks)**\n",
-    "  - Runs one batch end-to-end:\n",
-    "    - data → transforms → extractor forward → 3-target RF prediction → reconstruction → 5-target output\n",
-    "  - Prints shapes/dtypes and asserts the image tensor shape is `[B, 3, IMG_SIZE, IMG_SIZE]`.\n",
+    "---\n",
     "\n",
-    "## Letterboxing removal locations\n",
-    "- Removed from:\n",
-    "  - Feature extractor pipeline (Cells 3–4)\n",
-    "  - TTA pipelines (Cell 5)\n",
-    "- Replaced everywhere with:\n",
-    "  - `Resize((IMG_SIZE, IMG_SIZE))` only (no padding, no cropping)\n",
+    "## Summary of changes\n",
     "\n",
-    "## Assumptions (explicit)\n",
-    "- Notebook A did not define a reusable image size variable, so **`IMG_SIZE = 224`** was introduced once (Cell 1) and used everywhere.\n",
-    "- Submission IDs are constructed from filenames as `image_id__target_name`, consistent with Notebook A’s existing submission logic.\n"
+    "### A) Letterboxing added (SquarePad + Resize)\n",
+    "**Modified cells**\n",
+    "- **Cell 2 — Letterboxing**\n",
+    "  - Added optimized `SquarePad(fill=0, padding_mode=\"constant\")` for symmetric pad-to-square.\n",
+    "  - Added `build_letterbox_resize_transform(IMG_SIZE, mean, std, fill)` to centralize the preprocessing pipeline.\n",
+    "\n",
+    "- **Cell 3 — ResNet18 feature extractor transform**\n",
+    "  - Updated `IMG_TFM` to:\n",
+    "    - `SquarePad()` → `Resize((IMG_SIZE, IMG_SIZE))` → `ToTensor()` → `Normalize(mean,std)`\n",
+    "  - No other changes to model/weights loading.\n",
+    "\n",
+    "- **Cell 4 — Duplicate ResNet18 setup**\n",
+    "  - Mirrored the same `IMG_TFM` update to keep behavior consistent across both duplicated setup cells.\n",
+    "\n",
+    "- **Cell 5 — TTA transforms (validation/inference-only)**\n",
+    "  - Updated TTA pipelines to use the same letterbox+resize base transform (via the builder), with deterministic flips layered on top:\n",
+    "    - original\n",
+    "    - horizontal flip\n",
+    "    - vertical flip\n",
+    "\n",
+    "**Net effect**\n",
+    "- All image preprocessing that feeds the feature extractor now preserves aspect ratio via padding-to-square before resizing.\n",
+    "- No padding-based resizing is used outside this explicit `SquarePad` step (i.e., letterboxing behavior is centralized and consistent).\n",
+    "\n",
+    "---\n",
+    "\n",
+    "### B) Core Strategy retained (3-target training → 5-target reconstruction)\n",
+    "**Already implemented and unchanged by this update**\n",
+    "- Train/predict only **3 targets**:\n",
+    "  - `Dry_Total_g`, `GDM_g`, `Dry_Green_g`\n",
+    "- Reconstruct the remaining **2 targets** during validation/inference:\n",
+    "  - `Dry_Clover_g = max(0, GDM_g - Dry_Green_g)`\n",
+    "  - `Dry_Dead_g   = max(0, Dry_Total_g - GDM_g)`\n",
+    "- Submission still outputs **all 5 targets** in the required naming/order.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## Assumptions\n",
+    "- `IMG_SIZE` is the single canonical image size used everywhere.\n",
+    "- Letterboxing uses constant black padding (`fill=0`).\n"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "dcb97d3d",
+   "id": "8055ceb2",
    "metadata": {
     "papermill": {
-     "duration": 0.004294,
-     "end_time": "2026-01-24T06:38:08.388864",
+     "duration": 0.004607,
+     "end_time": "2026-01-24T07:05:38.073437",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.384570",
+     "start_time": "2026-01-24T07:05:38.068830",
      "status": "completed"
     },
     "tags": []
@@ -1347,13 +1413,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "275432a4",
+   "id": "f7d2f44b",
    "metadata": {
     "papermill": {
-     "duration": 0.00436,
-     "end_time": "2026-01-24T06:38:08.397597",
+     "duration": 0.00443,
+     "end_time": "2026-01-24T07:05:38.082444",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.393237",
+     "start_time": "2026-01-24T07:05:38.078014",
      "status": "completed"
     },
     "tags": []
@@ -1365,19 +1431,19 @@
   {
    "cell_type": "code",
    "execution_count": 13,
-   "id": "d19a7195",
+   "id": "34513faa",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:38:08.407832Z",
-     "iopub.status.busy": "2026-01-24T06:38:08.407549Z",
-     "iopub.status.idle": "2026-01-24T06:38:08.412270Z",
-     "shell.execute_reply": "2026-01-24T06:38:08.411727Z"
+     "iopub.execute_input": "2026-01-24T07:05:38.093285Z",
+     "iopub.status.busy": "2026-01-24T07:05:38.093035Z",
+     "iopub.status.idle": "2026-01-24T07:05:38.097505Z",
+     "shell.execute_reply": "2026-01-24T07:05:38.096942Z"
     },
     "papermill": {
-     "duration": 0.01161,
-     "end_time": "2026-01-24T06:38:08.413546",
+     "duration": 0.011803,
+     "end_time": "2026-01-24T07:05:38.098798",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.401936",
+     "start_time": "2026-01-24T07:05:38.086995",
      "status": "completed"
     },
     "tags": []
@@ -1485,13 +1551,13 @@
   },
   {
    "cell_type": "markdown",
-   "id": "f17e6a70",
+   "id": "7bf03617",
    "metadata": {
     "papermill": {
-     "duration": 0.004438,
-     "end_time": "2026-01-24T06:38:08.422452",
+     "duration": 0.004548,
+     "end_time": "2026-01-24T07:05:38.107969",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.418014",
+     "start_time": "2026-01-24T07:05:38.103421",
      "status": "completed"
     },
     "tags": []
@@ -1503,19 +1569,19 @@
   {
    "cell_type": "code",
    "execution_count": 14,
-   "id": "b4d41849",
+   "id": "f41e2789",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-01-24T06:38:08.432487Z",
-     "iopub.status.busy": "2026-01-24T06:38:08.432051Z",
-     "iopub.status.idle": "2026-01-24T06:38:08.435337Z",
-     "shell.execute_reply": "2026-01-24T06:38:08.434687Z"
+     "iopub.execute_input": "2026-01-24T07:05:38.118580Z",
+     "iopub.status.busy": "2026-01-24T07:05:38.118034Z",
+     "iopub.status.idle": "2026-01-24T07:05:38.121258Z",
+     "shell.execute_reply": "2026-01-24T07:05:38.120724Z"
     },
     "papermill": {
-     "duration": 0.00989,
-     "end_time": "2026-01-24T06:38:08.436699",
+     "duration": 0.009984,
+     "end_time": "2026-01-24T07:05:38.122505",
      "exception": false,
-     "start_time": "2026-01-24T06:38:08.426809",
+     "start_time": "2026-01-24T07:05:38.112521",
      "status": "completed"
     },
     "tags": []
@@ -1583,14 +1649,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 110.228049,
-   "end_time": "2026-01-24T06:38:10.776072",
+   "duration": 115.288919,
+   "end_time": "2026-01-24T07:05:41.189369",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-01-24T06:36:20.548023",
+   "start_time": "2026-01-24T07:03:45.900450",
    "version": "2.6.0"
   }
  },
